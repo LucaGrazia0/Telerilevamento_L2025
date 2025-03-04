@@ -9,6 +9,8 @@ im.list() #funzione per avere la listat totale di tutti i dati che abbiamo a dis
 # for the all course we are going to use = instead <-
 b2 = im.import("sentinel.dolomites.b2.tif")
 
+
+#questi tre colori sono tre elementi di un vettore, usiamo quindi c per concatenare e mettiamo 100 al di fuori della funzione che rappresenta il numero di gamme di differenti colori 
 cl <- colorRampPalette(c("black", "grey", "light grey")) (100)
 plot(b2, col=cl)
 
