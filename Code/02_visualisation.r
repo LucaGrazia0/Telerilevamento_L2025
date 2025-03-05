@@ -71,3 +71,37 @@ im.plotRGB(sentstack, r=3, g=2, b=1) # natural color image
 im.plotRGB(sentstack, r=4, g=3, b=2) # false color image
 im.plotRGB(sentstack, r=3, g=4, b=2) # false color image
 im.plotRGB(sentstack, r=3, g=2, b=4) # false color image
+
+
+#cose fatte ieri 
+
+# R code for visualizing satellite data
+
+# install.packages("devtools")
+library(devtools)
+install_github("ducciorocchini/imageRy")
+
+library(terra)
+library(imageRy)
+
+im.list()
+ 
+# For the whole course we are going to make use of = instead of <-
+# This is based on the following video:
+# https://www.youtube.com/watch?v=OJMpKCKH1hM
+
+b2 = im.import("sentinel.dolomites.b2.tif")
+plot(b2, col=cl)
+
+cl = colorRampPalette(c("black", "dark grey", "light grey"))(100)
+plot(b2, col=cl)
+
+cl = colorRampPalette(c("black", "dark grey", "light grey"))(3)
+plot(b2, col=cl)
+# tlumley@u.washington.edu, Thomas Lumley
+
+# Exercise: make your own color ramp
+# https://sites.stat.columbia.edu/tzheng/files/Rcolor.pdf
+
+cl = colorRampPalette(c("royalblue3", "seagreen1", "red1"))(100)
+plot(b2, col=cl)
