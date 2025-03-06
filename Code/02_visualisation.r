@@ -1,3 +1,5 @@
+#per esame sapere quali funzioni sono di quali pacchetti e chi sono e cosa servono
+install.packages("viridis")
 # r code for visualising satellite data 
 
 library(terra)
@@ -167,6 +169,8 @@ plot(sent [[4]])  #la doppia quadra serve per metterne solo uno se abbiamo una c
 #importing several bands altogether 
 sentdol=im.import("sentinel.dolomites")
 
-#
+#per le correlazioni
+pairs(sentdol)
 
-
+#viridis
+plot(sentdol, col=viridis(100)) #https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html
