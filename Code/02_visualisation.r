@@ -174,3 +174,64 @@ pairs(sentdol)
 
 #viridis
 plot(sentdol, col=viridis(100)) #https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html
+
+
+
+library(terra)
+Library(imageRy)
+library(ggplot2)
+library(viridis)
+
+
+#ripresa lezione precedente
+
+sentdol = im.import("sentinel.dolomites")
+> sentdol
+class       : SpatRaster 
+dimensions  : 934, 1059, 4  (nrow, ncol, nlyr)
+resolution  : 10, 10  (x, y)
+extent      : 740350, 750940, 5158820, 5168160  (xmin, xmax, ymin, ymax)
+coord. ref. : WGS 84 / UTM zone 32N (EPSG:32632) 
+sources     : sentinel.dolomites.b2.tif  
+              sentinel.dolomites.b3.tif  
+              sentinel.dolomites.b4.tif  
+              sentinel.dolomites.b8.tif  
+names       : sentine~ites.b2, sentine~ites.b3, sentine~ites.b4, sentine~ites.b8 
+min values  :            1338,            1293,             750,            1159 
+max values  :            6903,            6780,            7229,            7313 
+> print(sentdol)
+class       : SpatRaster 
+dimensions  : 934, 1059, 4  (nrow, ncol, nlyr)
+resolution  : 10, 10  (x, y)
+extent      : 740350, 750940, 5158820, 5168160  (xmin, xmax, ymin, ymax)
+coord. ref. : WGS 84 / UTM zone 32N (EPSG:32632) 
+sources     : sentinel.dolomites.b2.tif  
+              sentinel.dolomites.b3.tif  
+              sentinel.dolomites.b4.tif  
+              sentinel.dolomites.b8.tif  
+names       : sentine~ites.b2, sentine~ites.b3, sentine~ites.b4, sentine~ites.b8 
+min values  :            1338,            1293,             750,            1159 
+max values  :            6903,            6780,            7229,            7313 
+
+> nlyr(sentdol) #numero di bande 
+[1] 4
+> ncell(sentdol) #numero di pixel totali per ogni banda 
+[1] 989106
+
+
+#Layers 
+#1=blu
+#2=verde
+#3=rosso
+#4=NIR
+#metto i layer nel RGB qui sotto 
+
+
+im.plotRGB(sentdol, r=3, g=2, b=1)    #importante che RGB sia maiuscolo, si dice per questi "colori naturali"
+
+#devo inserire anche la banda 4 per generare un'immagine a falsi colori per cui devo tirare via ua delle tre bande per mettere la nir, inseriamo 4 nel r e poi facciamo scattare di uno gli altri
+im.plotRGB(sentdol, r=4, g=3, b=2) #nell'infrarosso vicino riflette molto la foglia e quindi le piante rifletteranno un sacco e quindi usciraanno di colore rosso
+
+#plottiamo usando immagine sulla componente green 
+im.plotRGB(sentdol, r=3, g=4, b=1)
+im.plotRGB(sentdol, r=1, g=4, b=3) #oppure tanto non cambia niente perche è solo l'nfrarosso che fa variare
