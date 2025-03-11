@@ -1,4 +1,33 @@
+#code to calculate spectral indices derived from RS imagery (satellite images)
+
 library(terra)
+library(imageRy)
+library(ggplot2)
+library(viridis)
+
+im.list #use matogrosso 1992
+
+mato1992=im.import("matogrosso_l5_1992219_lrg.jpg")
+
+#1=NIR
+#2=red
+#3=green
+
+mato1992=flip(mato1992)  #con flip bisogna tenere aperto quarz o riplottarlo
+im.plotRGB(mato1992, r=1, g=2, b=3) 
+im.plotRGB(mato1992, r=2, g=1, b=3) #per vedere che la foresta è verde e l'acqua è rosa
+im.plotRGB(mato1992, r=2, g=3, b=1) #con questa si vede bene la differenziazione tra il suolo nudo (giallo) e tutto il resto
+
+mato2006=im.import("matogrosso_ast_2006209_lrg.jpg" )
+
+im.multiframe (1,2)
+> im.plotRGB(mato1992, r=2, g=3, b=1)
+> im.plotRGB(mato2006, r=2, g=3, b=1)
+> im.plotRGB(mato1992, r=2, g=3, b=1, title="matogrosso1992") #aggiunta del titolo
+> im.plotRGB(mato2006, r=2, g=3, b=1, title="matogrosso2006")
 
 
-
+#radiometric resolution di unable to sola banda
+plot(mato1992[[1]], col=inferno(100))
+plot(mato2006[[1]], col=inferno(100))
+#questa ci fa vedere che non varia più tra 0 e 1 la rifkettanza ma tra 0 e 255 ed è il concetto di bit, vuol dire che i bit che sono 2 alla n ha 2^8, quindi sto usando immagini a 8 bit 
