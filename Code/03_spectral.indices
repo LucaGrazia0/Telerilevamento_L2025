@@ -30,4 +30,15 @@ im.multiframe (1,2)
 #radiometric resolution di unable to sola banda
 plot(mato1992[[1]], col=inferno(100))
 plot(mato2006[[1]], col=inferno(100))
-#questa ci fa vedere che non varia più tra 0 e 1 la rifkettanza ma tra 0 e 255 ed è il concetto di bit, vuol dire che i bit che sono 2 alla n ha 2^8, quindi sto usando immagini a 8 bit 
+#questa ci fa vedere che non varia più tra 0 e 1 la rifkettanza ma tra 0 e 255 ed è il concetto di bit, vuol dire che i bit che sono 2 alla n ha 2^8, quindi sto usando immagini a 8 bit
+
+
+#DVI= difference vegatation index
+#Tree: NIR=255, red=0 (assorbe)
+#DVI=NIR-red= 255 indice di salute delle piante 
+
+#stressed tree: NIR=100 , red=20
+#DVI=100-20=80
+
+
+
