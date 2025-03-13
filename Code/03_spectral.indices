@@ -37,8 +37,71 @@ plot(mato2006[[1]], col=inferno(100))
 #Tree: NIR=255, red=0 (assorbe)
 #DVI=NIR-red= 255 indice di salute delle piante 
 
-#stressed tree: NIR=100 , red=20
-#DVI=100-20=80
+#stressed tree: NIR=100 , red=30
+#DVI=100-30=70
+
+#calculatind dvi
+
+# 1=nir
+# 2=red
+
+dvi1992=mato1992[[1]]-mato1992[[2]]  #NIR-red
+plot(dvi1992) 
+
+#range DVI
+#Maximum: NIR-red=255-0=255
+#min:NIR-red= 0-255=-255 
+
+plot(dvi1992, col=magma(100))
+
+#calculate DVI of 2006
+dvi2006=mato2006[[1]]-mato2006[[2]]
+plot(dvi2006)
+
+#Different radiometric resolution (immagini a bit diverse) così sarà sempre da -1 a 1
+
+
+
+#dvi 8 bit image range (0,255)
+#Maximum: NIR-red=255-0= 255
+#min: NIR-red= 0-255= -255 
+
+#dvi 4 bit image: range (0,15)
+#Maximum: NIR-red= 15-0= 15
+#min: NIR-red= 0-15= -15
+
+#NDVI è una standardizzazione per i diversi bit
+
+#NDVI 8 bit  image range (0,255)
+# max: (nir-red)/(nir+red)= (255-0)/(255+0)=1 
+#min: (rnir-red)/(nir+red)=(0-255)/(0+255)=-1 
+
+
+#NDVI 4 bit  image range (0,15)
+# max: (nir-red)/(nir+red)= (15-0)/(15+0)=1 
+#min: (rnir-red)/(nir+red)=(0-15)/(0+15)=-1 
+
+
+ndvi1992=(mato1992[[1]]-mato1992[[2]])/(mato1992[[1]]+mato1992[[2]])
+plot(ndvi1992)
+
+ndvi2006=(mato2006[[1]]-mato2006[[2]])/(mato2006[[1]]+mato2006[[2]])
+
+
+# im.dvi fa la differenza tra nir e red
+
+dvi1992auto= im.dvi(mato1992, 1, 2)   #immagine e poi i nir e red
+plot(dvi1992auto)
+
+#  im.ndvi fa la stessa cosa
+
+ndvi1992auto= im.ndvi(mato1992, 1, 2)   #immagine e poi i nir e red
+
+
+
+
+
+
 
 
 
