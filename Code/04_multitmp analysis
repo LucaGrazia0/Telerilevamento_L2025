@@ -1,5 +1,5 @@
 # time series analysis in R
-
+install.packages("ggridges") #serve per creare ridgeline plot, c'è una funzione di imagery che richiama questo
 library(terra)
 library(imageRy)
 library(ggridges) # for ridgeline plots
@@ -116,7 +116,50 @@ dev.off()
 
 
 #lezione 20 marzo
-
-
+library(ggplot2)
+library(ggridges)
 
 im.ridgeline 
+#ridgeline plots
+gr=im.import("greenland")
+im.ridgeline(gr,scale=1)
+
+im.ridgeline(gr,scale=2)
+im.ridgeline(gr,scale=2, palette="inferno")
+
+
+#import the NDVI data from sentinel 
+sent=im.import("Sentinel2")
+
+im.ridgeline(sent, scale=2) #chiamandosi tutti ndvi sovrascrive in un'unica curva
+#changing names attraverso la funzione names()
+#sources     : Sentinel2_NDVI_2020-02-21.tif  
+ #             Sentinel2_NDVI_2020-05-21.tif  
+  #            Sentinel2_NDVI_2020-08-01.tif  
+   #           Sentinel2_NDVI_2020-11-27.tif  
+
+names(sent)= c("02_Feb","05_May","08_Aug","11_Nov") #importante mettere lo 0 davanti
+im.ridgeline(sent, scale=2, palette="mako")
+
+pairs(sent)
+plot(sent[[1]], sent[[2]]) #pixel di febbraio rispetto maggio
+plot(sent[[1]], sent[[2]], col="gray")
+
+#aggiungo una linea per capire dove i dati sarebbero se fossero uguali, nel momento in cui y=x
+#may=y, feb=x
+#una fuzione che descrive una linea è y=a+bx
+#a=0 intercetta, b=1 pendenza
+#y=a+bx=0+1x=x
+abline(0,1, col="red")
+
+#mettiamo i due dataset con gli stessi range
+
+plot(sent[[1]], sent[[2]], xlim=c(-0.3,0.9), ylim=c(-0.3,0.9)) #serve per fare le cose uguali oer i dati, questo ci dice che i pixel sopra alla linea indicano dati più alti a maggio che a febbraio (che va bene)
+abline(0,1, col="red")
+
+im.multiframe(1,3)
+plot(sent[[1]])
+plot(sent[[2]])
+plot(sent[[1]], sent[[2]], xlim=c(-0.3,0.9), ylim=c(-0.3,0.9))
+abline(0,1, col="red") 
+#ho preso i dati per capire come si distribuiscono i punti
