@@ -6,6 +6,8 @@ library(ggridges) # for ridgeline plots
 library(ggplot2) # for ridgeline plots
 library(viridis) # for ridgeline plots
 
+
+listing the data
 im.list()
 
 # Importing data
@@ -110,3 +112,11 @@ dev.off()
 jpeg("difgreen.jpeg")
 plot(grdif)
 dev.off()
+
+
+
+#lezione 20 marzo
+
+
+
+im.ridgeline 
