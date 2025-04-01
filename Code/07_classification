@@ -1,5 +1,6 @@
 #R code fir classifing images
 
+#install.packages("patchwork")
 library(terra)
 library(imageRy)
 library(ggplot2) # package needed for the final graph (histograms)
@@ -43,3 +44,40 @@ perc2006=freq(mato2006c)*100/tot2006
 
 #human= 54% , forest=46%
 
+#creiamo un dataframe cioè una tabella
+
+class= c("forest", "human")
+y1992=c(83,17) #valori per le due colonne forest e human
+y2006=c(45,55)
+
+taboutput=data.frame(class, y1992, y2006)
+
+ggplot #funzione di base per fare i plot 
+#taboutput
+#aes= colori e altre cose per x e y
+#color=class per mettere colori differenti
+#geom_bar serve per descrivere il tipo di grafico bar=istogrammi
+#stat è la statistica da usare, da il contorno
+#fill serve per mettere dentro il colore
+
+ggplot(taboutput, aes(x=class, y=y1992, color=class))+
+  geom_bar(stat="identity", fill="white")
+
+ ggplot(taboutput, aes(x=class, y=y2006, color=class))+
+   geom_bar(stat="identity", fill="white")
+
+#patchwork serve per unire grafici con ggplot2 
+
+p1=ggplot(taboutput, aes(x=class, y=y1992, color=class))+
+  geom_bar(stat="identity", fill="white")+ylim(c(0,100))
+p2=ggplot(taboutput, aes(x=class, y=y2006, color=class))+
+   geom_bar(stat="identity", fill="white")+ylim(c(0,100))
+
+p1+p2 #ed esce fuori il grafico ma non ha la stessa scala per cui bisogna riscalarlo, mettiamo quindi ylim(c(0,100)) nella funzione
+p1/p2 #uno sopra all'altro
+
+
+p0=im.ggplot(mato1992)   #im.ggplot è dentro imagery
+p00=im.ggplot(mato2006)
+
+p0+p00+p1+p2
