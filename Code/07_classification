@@ -1,0 +1,45 @@
+#R code fir classifing images
+
+library(terra)
+library(imageRy)
+library(ggplot2) # package needed for the final graph (histograms)
+library(patchwork) # package needed to couple graphs
+
+im.list() #immagini matogrosso
+mato1992=im.import("matogrosso_l5_1992219_lrg.jpg")
+mato1992=flip(mato1992)
+plot(mato1992)
+mato2006=im.import("matogrosso_ast_2006209_lrg.jpg")
+mato2006=flip(mato2006)
+plot(mato2006)
+
+# funzione im.classify che funziona come= nome immagine + numero di classi (num.cluster)
+
+im.classify(mato1992, num_cluster=2) 
+
+mato1992c=im.classify(mato1992, num_cluster=2) #associo un qualcosa
+# classe 2=foresta
+# classe 1=human cioè tutto quello che non è foresta 
+
+mato2006c=im.classify(mato2006, num_clusters=2)
+#classe 1=human
+#classe 2= forest
+
+#calcolo frequenza
+f1992=freq(mato1992c)
+
+#freq/tot pixel per averre le proporzioni
+tot1992=ncell(mato1992c)
+#per le proporzioni si fa freq/tot
+prop1992=f1992/tot1992
+#percentuali
+perc1992=prop1992*100
+
+#human=17%
+#forest=83%
+
+tot2006=ncell(mato2006c)
+perc2006=freq(mato2006c)*100/tot2006
+
+#human= 54% , forest=46%
+
