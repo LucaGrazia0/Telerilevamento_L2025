@@ -81,3 +81,54 @@ p0=im.ggplot(mato1992)   #im.ggplot è dentro imagery
 p00=im.ggplot(mato2006)
 
 p0+p00+p1+p2
+
+
+#volorare barre
+p1=ggplot(taboutput, aes(x=class, y=y1992, fill=class, color=class))+
+  geom_bar(stat="identity", fill="white")+ylim(c(0,100))
+
+
+
+
+
+
+#--- solar orbiter 
+
+im.list()
+solar=im.import("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg")
+
+#classify the images in three classes
+im.classify(solar, num_cluster=3)
+
+#plot the original image beside the classify one
+im.multiframe (1,2)
+solar=im.import("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg")
+solarc=im.classify(solar, num_cluster=3)
+
+im.multiframe(1,2)
+
+#rinominiamo le classi ii bzse ai livelli energetici
+
+#1= low 
+#2= high
+#3= medium
+
+#subst serve per sostituire valori ed è nel paccheto terra
+
+solarcsubst=subst(solarc, c(1,3,2), c("c1_low","c2_medium","c3_high")) #metto la c1,c2,c3 per disporli in ordine alfabetico nel plot
+
+
+#ex: calculate the percentage of the sun energy classes with one line of code
+
+perc=freq(solarcsubst)$count*100/ncell(solar) #$count perchè è quella che ci intreessa
+#  37.92693 41.04342 21.02965
+#create dataframe 
+class=c("c1_low","c2_medium","c3_hight")
+perc= c(38,41,21)
+tabsol=data.frame(class,perc)
+
+ggplot(tabsol, aes(x=class, y=perc, fill=class, color=class))+
+  geom_bar(stat="identity")
+#ylim(c(0,100))
+
++ coord_flip() #nel caso volessimo girare il grafico
