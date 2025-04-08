@@ -1,0 +1,31 @@
+#codice per calcolare la variabilità spaziale 
+
+# deviazione standard: quanto un sistema varia intorno ad una media, si calcola intorno ad una curva gaussiana, l'intorno del 68% dei dati è la dev standard 
+  # calcolo scoostamento tra situazione e media, sotto radice è la deviazio e standard
+
+library(terra)
+library(imageRy)
+library(ggplot2)
+library(viridis)
+library(patchwork)
+library(rasterdiv)
+
+im.list()
+
+
+#dataset ignoranti: età
+23,22,23,49
+
+media= (23+22+23+49)/4=29,25
+#quanta vari c'è intorno a questa media?
+
+numeratore=(23-29,25)^2 + (22-29,25)^2+(23-29,25)^2+(49-29,25)^2=520,75  #numeratore della formula, si chiama scarto quadratico
+den=4 #numeri che abbiamo
+varianza= numeratore/den=520,75/4=130,188 #calcolo della varianza
+
+stdev=sqrt(varianza)=13.1751 #applichiamo la radice quadrata per capire la deviaizone standard
+
+#tolgo 49
+sd(c(23,22,23))=0.5773503
+
+# a livello geologico posso avere uno strato diverso e se andassi a misurare posso capire la divresità 
