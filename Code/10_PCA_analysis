@@ -1,0 +1,40 @@
+#multivar analysisi
+#serve per passare da più bande a una sola 
+
+#per compattare un sistema da n dimensioni a una sola possiao usare una PCA
+  #le variabili tra loro sono correlate, prendendo x e y possiamo capire la loro variazione, una procedura per fottere il sistema e usare solo un asse 
+  #posso usare solo un asse, chiamerò z che per defnizione ha una variabilità di punti  molto più grande di w che è la sua incidente 
+  #sicuramente z ha un range di valori molto più grandi e si chiamerà PC1 e w si chiamerà PC2
+
+#R code for principal component analysis
+
+library(imageRy)
+library(terra)
+
+
+im.list()
+
+sent = im.import("sentinel.png")
+sent=flip(sent) #eliminiamo la quarta banda gialla 
+
+sent=c(sent[[1]], sent[[2]], sent[[3]])
+#bande
+  # 1=NIR
+  # 2= red
+  # 3= green
+?im.pca #n_samples è il numero di pixel che prendo 
+
+sentpca=im.pca(sent) 
+#[1] 75.624894 51.903693  5.764147
+
+tot= 75+51+5 =131
+#75*131/100=
+#la prima componente ha un sacco di informazioni, ha moltissima variabilità
+ sentpca=im.pca(sent, n_samples=100000) #per stabilizzare i valori 
+
+sdpc1=focal(sentpca[[1]], w=c(3,3), fun="sd")
+plot(sdpc1) #non è molto diversa dal calcolo sul nir, ma l'abbiamo scelta in un modo molto oggettivoù
+
+pairs(sent) #per vedere la correlazione tra le variabili, le bande 2 e 3 sono molto correlate
+
+#se usiamo con le nostre variabili (geologiche o altre) dobbiamo sempre normalizzarle, è imperativo, per farlo basta dividere per il massimo
