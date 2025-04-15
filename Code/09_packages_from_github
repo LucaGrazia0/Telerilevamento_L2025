@@ -1,0 +1,13 @@
+#r code for installing pack from github
+
+
+#FROM GITHUB
+library(devtools) # or remotes
+install_github("ducciorocchini/cblindplot")
+library(cblindplot)
+
+install_github("clauswilke/colorblindr")  #come faccio a sapere se un autore di un pacchetto è morto, R sul CRAN richiede di revisionare gli atori, su github invece non richiede
+
+
+#from CRAN
+install.packages("colorblindcheck")
