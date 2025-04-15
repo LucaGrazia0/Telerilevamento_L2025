@@ -1,0 +1,10 @@
+#multivar analysisi
+#serve per passare da più bande a una sola 
+
+#per compattare un sistema da n dimensioni a una sola possiao usare una PCA
+  #le variabili tra loro sono correlate, prendendo x e y possiamo capire la loro variazione, una procedura per fottere il sistema e usare solo un asse 
+  #posso usare solo un asse, chiamerò z che per defnizione ha una variabilità di punti  molto più grande di w che è la sua incidente 
+  #sicuramente z ha un range di valori molto più grandi e si chiamerà PC1 e w si chiamerà PC2
+
+
+  
