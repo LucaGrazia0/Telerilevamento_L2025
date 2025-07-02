@@ -226,3 +226,51 @@ im.multiframe(1,2)
 plotRGB(blattenpre, r = 1, g = 2, b = 4, stretch="lin", main = "BlattenPre") 
 plotRGB(blattenpost, r = 1, g = 2, b = 4, stretch="lin", main = "BlsttenPost")
 dev.off()
+
+
+# Calcolo il DVI: Difference Vegetation Index, è un indice che ci dà informazione sullo stato delle piante, basandosi sulla riflettanza della vegetazione nelle bande del rosso B1 e sulla banda B8 relativa al NIR. Se l’albero è stressato, le cellule a palizzata collassano, allora la riflettanza nel NIR sarà più bassa.
+# Calcolo: DVI= NIR - red
+
+DVIpre = blattenpre[[4]] - blattenpre[[1]] #NIR - red
+
+#oppure
+DVIpre=im.dvi(blattenpre, 4, 1)
+plot(DVIpre)
+plot(DVIpre, col=inferno(100))
+dev.off()
+
+DVIpost = blattenpost[[4]] - blattenpost[[1]] #NIR - red
+
+#oppure
+DVIpost=im.dvi(blattenpost, 4, 1) 
+plot(DVIpost)
+plot(DVIpost, col=inferno(100))
+dev.off()
+
+# Creo un pannello multiframe per confrontare le immagini su cui è stato calcoalto il DVI:
+im.multiframe(1,2)
+plot(DVIpre, stretch = "lin", main = "pre_frana", col=inferno(100))
+plot(DVIpost, stretch = "lin", main = "post_frana", col=inferno(100))
+dev.off()
+
+#scrivere che vedo 
+
+#NDVI
+
+NDVIprima = (blattenpre[[4]] - blattenpre[[1]]) / (blattenpre[[4]] + blattenpre[[1]]) # NDVI= (NIR - red) / (NIR + red)
+#oppure
+NDVIprima =im.ndvi(blattenpre, 4, 1)
+plot(NDVIpre, stretch = "lin", main = "NDVIpre", col=inferno(100))
+dev.off()
+
+NDVIdopo = (blattenpost[[4]] - blattenpost[[1]]) / (blattenpost[[4]] + blattenpost[[1]]) # NDVI= (NIR - red) / (NIR + red)
+#oppure
+NDVIdopo =im.ndvi(blattenpost, 4, 1)
+plot(NDVIpost, stretch = "lin", main = "NDVIpost", col=inferno(100))
+dev.off()
+
+im.multiframe(1,2)
+plot(NDVIprima, stretch = "lin", main = "NDVIprima_frana", col=inferno(100))
+plot(NDVIdopo, stretch = "lin", main = "NDVIdopo_frana", col=inferno(100))
+dev.off()
+
