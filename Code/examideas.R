@@ -200,6 +200,29 @@ plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima"
 plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo")
 dev.off()
 
+# Creo un pannello multiframe per confrontare le 4 bande che costituiscono ogniuna delle due immagini:
+# Cambio i colori per migliorare la visualizzazione utilizzando il colore "magma" dalla palette dei colori di viridis.
+im.multiframe(2,4) #(layout: 2 righe, 4 colonne)
+plot(blattenpre[[1]], col = magma(100), main = "Pre - Banda 1")
+plot(blattenpre[[2]], col = magma(100), main = "Pre - Banda 2")
+plot(blattenpre[[3]], col = magma(100), main = "Pre - Banda 3")
+plot(blattenpre[[4]], col = magma(100), main = "Pre - Banda 8")
+plot(blattenpost[[1]], col = magma(100), main = "Post - Banda 1")
+plot(blattenpost[[2]], col = magma(100), main = "Post - Banda 2")
+plot(blattenpost[[3]], col = magma(100), main = "Post - Banda 3")
+plot(blattenpost[[4]], col = magma(100), main = "Post - Banda 8")
 
+dev.off()
 
+# Confronto delle due immagini mettendo in risalto solo le corrispettive bande 8: 
 
+im.multiframe(1,2) #isolo e visualizzo solo le bande 8 relative al NIR delle due immagini una accanto all'altra
+plot(blattenpre[[4]], stretch="lin", main = "BlattenpreNIR", col=magma(100))
+plot(blattenpost[[4]], stretch="lin", main = "BlattenpostNIR", col=magma(100))
+dev.off()
+
+# Visualizzazione del suolo nudo rispetto alla vegetazione impostando sulla banda del blu la banda dell'infrarosso in, questo fa risaltare la vegetazione di colore blu e tutto quello che non è vegetazione nella sccala del giallo, solitamente è usato per evidenziare il suolo nudo
+im.multiframe(1,2)
+plotRGB(blattenpre, r = 1, g = 2, b = 4, stretch="lin", main = "BlattenPre") 
+plotRGB(blattenpost, r = 1, g = 2, b = 4, stretch="lin", main = "BlsttenPost")
+dev.off()
