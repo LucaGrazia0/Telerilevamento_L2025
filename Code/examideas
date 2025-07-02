@@ -176,11 +176,29 @@ Export.image.toDrive({
 #usando google earth engine ottengo le immagini su google drive, le scarico in formato .tif
 #successivamente imposto la working directory per visuallizzare e analizzare queste immagini
 
+setwd("/Users/lucagrazia/Downloads")
 
-setwd()
+#blattenpre
+blattenpre=rast("blattenpre1.tif") #importo e nomino il raster
+plot(blattenpre) #visualizzo attraverso il plot l'immagine
+plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima") #plot RGB per visualizzare l'immagine nello spettro del visibile, Stretch lineare: i valori vengono riscalati linearmente tra 0 e 255 per visualizzare meglio l'immagine.
+dev.off()
 
 
+#ripeto la stessa funzione con la seconda immagine 
 
+#blattenpost
+blattenpost=rast("blattenpostNIR.tif") #importo e nomino il raster
+plot(blattenpost) #visualizzo attraverso il plot l'immagine
+plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo") #plot RGB per visualizzare l'immagine nello spettro del visibile, Stretch lineare: i valori vengono riscalati linearmente tra 0 e 255 per visualizzare meglio l'immagine.
+dev.off()
+
+#dato che ho scaricato e visualizzato le due immagini singolarmente ora imposto un pannello multiframe per visualizzarle entrambe 
+
+im.multiframe(1,2) #con questa funzione apro un pannello multiframe che mi permette di vedere le 2 immagini una affiancate 
+plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima")
+plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo")
+dev.off()
 
 
 
