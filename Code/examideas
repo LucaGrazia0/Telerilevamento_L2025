@@ -1,3 +1,16 @@
+#Luca Grazia 
+
+# PACCHETTI USATI:
+library(terra) #funzione rast() per SpatRaster
+library(imageRy) #funzione im.plotRGB()
+library(viridis) #serve per creare plot di immagini con differenti palette di colori di viridis
+library(ggridges) #permette di creare i plot ridgeline
+
+
+
+# Idue codici seguenti utilizzano il linguaggio di programmazione java script all'interno della piattaforma Google Earth Engine per ottenere le immagini relative al paese di Blatten e  frana staccatasi da ghiacciaio Birch il 28 maggio 2025
+# Script per ottenere l'immagine "blattenpreNIR": riporta una collection di immagini che vanno dal 2025-01-01 al 2025-05-25 selezionando solo immagini con una copertura nuvolosa <20% e le bande relative al rosso, verde, blu e NIR.
+
 // ==============================================
 // Sentinel-2 Surface Reflectance - Cloud Masking and Visualization
 // https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S2_SR_HARMONIZED
@@ -78,7 +91,7 @@ Export.image.toDrive({
 
 
 
-post
+# Script per ottenere l'immagine "blattenpostNIR": riporta una collection di immagini che vanno dal 2025-05-30 al 2025-06-30 selezionando solo immagini con una copertura nuvolosa <20% e le bande relative al rosso, verde, blu e NIR.
 
 // ==============================================
 // Sentinel-2 Surface Reflectance - Cloud Masking and Visualization
@@ -159,7 +172,12 @@ Export.image.toDrive({
 });
 
 
+#Analisi dei dati satellitari
+#usando google earth engine ottengo le immagini su google drive, le scarico in formato .tif
+#successivamente imposto la working directory per visuallizzare e analizzare queste immagini
 
+
+setwd()
 
 
 
