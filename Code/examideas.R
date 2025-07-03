@@ -284,21 +284,33 @@ dev.off()
 #pre
 diffpre=blattenpre[[2]]-blattenpre[[4]]
 sumpre=blattenpre[[2]]+blattenpre[[4]]
-NDWIpre=diffpre/sumpre
-plot(NDWIpre)
+NDWI_pre=diffpre/sumpre
+plot(NDWI_pre)
 
 #post
 diffpost=blattenpost[[2]]-blattenpost[[4]]
 sumpost=blattenpost[[2]]+blattenpost[[4]]
-NDWIpost=diffpost/sumpost
-plot(NDWIpost)
+NDWI_post=diffpost/sumpost
+plot(NDWI_post)
 
 png("blattenNDVI.png")
 im.multiframe(1,2)
-plot(NDWIpre)
-plot(NDWIpost)
+plot(NDWI_pre)
+plot(NDWI_post)
 dev.off()
 #si nota un accumulo di acqua prima e dopo
+
+
+#Analisi multitemporale
+
+blatten_diff=blattenpre[[1]]-blattenpost[[1]] #rosso
+blatten_NDVIdiff=NDVIprima-NDVIdopo
+
+png("blattenmultitempo.png")
+im.multiframe(1,2)
+plot(blatten_diff, main = "BLATTEN PRIMA E DOPO:\ndifferenza banda del rosso")
+plot(blatten_NDVIdiff, main = "BLATTEN PRIMA E DOPO:\ndifferenza NDVI")
+
 
 
 
