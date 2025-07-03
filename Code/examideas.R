@@ -61,7 +61,7 @@ Map.centerObject(aoi, 10); // Zoom to the AOI
 
 // Display the first image of the collection (GEE does this by default)
 Map.addLayer(collection, {
-  bands: ['B4', 'B3', 'B2', 'B8'],  // True color: Red, Green, Blue
+  bands: ['B4', 'B3', 'B2', 'B8'],  // True color: Red, Green, Blue, NIR
   min: 0,
   max: 0.3
 }, 'First image of collection');
@@ -143,7 +143,7 @@ Map.centerObject(aoi, 10); // Zoom to the AOI
 
 // Display the first image of the collection (GEE does this by default)
 Map.addLayer(collection, {
-  bands: ['B4', 'B3', 'B2', 'B8'],  // True color: Red, Green, Blue
+  bands: ['B4', 'B3', 'B2', 'B8'],  // True color: Red, Green, Blue, NIR
   min: 0,
   max: 0.3
 }, 'First image of collection');
