@@ -8,7 +8,7 @@ library(ggridges) #permette di creare i plot ridgeline
 
 
 
-# Idue codici seguenti utilizzano il linguaggio di programmazione java script all'interno della piattaforma Google Earth Engine per ottenere le immagini relative al paese di Blatten e  frana staccatasi da ghiacciaio Birch il 28 maggio 2025
+# I due codici seguenti utilizzano il linguaggio di programmazione java script all'interno della piattaforma Google Earth Engine per ottenere le immagini relative al paese di Blatten e  frana staccatasi da ghiacciaio Birch il 28 maggio 2025
 # Script per ottenere l'immagine "blattenpreNIR": riporta una collection di immagini che vanno dal 2025-01-01 al 2025-05-25 selezionando solo immagini con una copertura nuvolosa <20% e le bande relative al rosso, verde, blu e NIR.
 
 // ==============================================
@@ -194,7 +194,7 @@ plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo"
 dev.off()
 
 #dato che ho scaricato e visualizzato le due immagini singolarmente ora imposto un pannello multiframe per visualizzarle entrambe 
-
+png("blattenrgb.png")
 im.multiframe(1,2) #con questa funzione apro un pannello multiframe che mi permette di vedere le 2 immagini una affiancate 
 plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima")
 plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo")
@@ -202,6 +202,7 @@ dev.off()
 
 # Creo un pannello multiframe per confrontare le 4 bande che costituiscono ogniuna delle due immagini:
 # Cambio i colori per migliorare la visualizzazione utilizzando il colore "magma" dalla palette dei colori di viridis.
+png("blattenbande.png")
 im.multiframe(2,4) #(layout: 2 righe, 4 colonne)
 plot(blattenpre[[1]], col = magma(100), main = "Pre - Banda 1")
 plot(blattenpre[[2]], col = magma(100), main = "Pre - Banda 2")
@@ -215,13 +216,14 @@ plot(blattenpost[[4]], col = magma(100), main = "Post - Banda 8")
 dev.off()
 
 # Confronto delle due immagini mettendo in risalto solo le corrispettive bande 8: 
-
+png("blattenbandanir.png")
 im.multiframe(1,2) #isolo e visualizzo solo le bande 8 relative al NIR delle due immagini una accanto all'altra
 plot(blattenpre[[4]], stretch="lin", main = "BlattenpreNIR", col=magma(100))
 plot(blattenpost[[4]], stretch="lin", main = "BlattenpostNIR", col=magma(100))
 dev.off()
 
 # Visualizzazione del suolo nudo rispetto alla vegetazione impostando sulla banda del blu la banda dell'infrarosso in, questo fa risaltare la vegetazione di colore blu e tutto quello che non è vegetazione nella sccala del giallo, solitamente è usato per evidenziare il suolo nudo
+png("blattensuolonudo.png")
 im.multiframe(1,2)
 plotRGB(blattenpre, r = 1, g = 2, b = 4, stretch="lin", main = "BlattenPre") 
 plotRGB(blattenpost, r = 1, g = 2, b = 4, stretch="lin", main = "BlsttenPost")
@@ -248,6 +250,7 @@ plot(DVIpost, col=inferno(100))
 dev.off()
 
 # Creo un pannello multiframe per confrontare le immagini su cui è stato calcoalto il DVI:
+png("blattenDVI.png")
 im.multiframe(1,2)
 plot(DVIpre, stretch = "lin", main = "pre_frana", col=inferno(100))
 plot(DVIpost, stretch = "lin", main = "post_frana", col=inferno(100))
@@ -260,17 +263,42 @@ dev.off()
 NDVIprima = (blattenpre[[4]] - blattenpre[[1]]) / (blattenpre[[4]] + blattenpre[[1]]) # NDVI= (NIR - red) / (NIR + red)
 #oppure
 NDVIprima =im.ndvi(blattenpre, 4, 1)
-plot(NDVIpre, stretch = "lin", main = "NDVIpre", col=inferno(100))
+plot(NDVIprima, stretch = "lin", main = "NDVIpre", col=inferno(100))
 dev.off()
 
 NDVIdopo = (blattenpost[[4]] - blattenpost[[1]]) / (blattenpost[[4]] + blattenpost[[1]]) # NDVI= (NIR - red) / (NIR + red)
 #oppure
 NDVIdopo =im.ndvi(blattenpost, 4, 1)
-plot(NDVIpost, stretch = "lin", main = "NDVIpost", col=inferno(100))
+plot(NDVIdopo, stretch = "lin", main = "NDVIpost", col=inferno(100))
 dev.off()
 
+png("blattenNDVI.png")
 im.multiframe(1,2)
 plot(NDVIprima, stretch = "lin", main = "NDVIprima_frana", col=inferno(100))
 plot(NDVIdopo, stretch = "lin", main = "NDVIdopo_frana", col=inferno(100))
 dev.off()
+
+#NDWI (Normalized Difference Water Index) è un indice usato in telerilevamento per identificare l'acqua superficiale nelle immagini satellitari.
+#NDWI= (Green-NIR)/(Green+NIR)
+
+#pre
+diffpre=blattenpre[[2]]-blattenpre[[4]]
+sumpre=blattenpre[[2]]+blattenpre[[4]]
+NDWIpre=diffpre/sumpre
+plot(NDWIpre)
+
+#post
+diffpost=blattenpost[[2]]-blattenpost[[4]]
+sumpost=blattenpost[[2]]+blattenpost[[4]]
+NDWIpost=diffpost/sumpost
+plot(NDWIpost)
+
+png("blattenNDVI.png")
+im.multiframe(1,2)
+plot(NDWIpre)
+plot(NDWIpost)
+dev.off()
+#si nota un accumulo di acqua prima e dopo
+
+
 
