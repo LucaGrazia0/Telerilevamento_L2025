@@ -31,3 +31,23 @@ positivo <- function(x) {
     print("lo zero è zero")
   }
   }
+
+
+
+green-nir/green+nir
+im.ndwi <- function(x, green, nir){
+  
+  if(!inherits(x, "SpatRaster")) {
+    stop("Input image should be a SpatRaster object.")
+  }
+  
+  if(!inherits(nir, "numeric") && !inherits(red, "numeric")) {
+    stop("NIR and red layers should be indicated with a number")
+  }
+  
+  ndwi = (x[[green]] - x[[nir]]) / (x[[green]] + x[[nir]])
+ 
+  return(ndwi)
+
+}
+
