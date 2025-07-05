@@ -1,4 +1,4 @@
-#code to build yur own function
+n#code to build yur own function
 #facciamo una somma, x e y osno i numeri che utente assegnerà 
 
 somma <- function(x,y) {
@@ -41,13 +41,13 @@ im.ndwi <- function(x, green, nir){
     stop("Input image should be a SpatRaster object.")
   }
   
-  if(!inherits(nir, "numeric") && !inherits(red, "numeric")) {
-    stop("NIR and red layers should be indicated with a number")
+  if(!inherits(green, "numeric") && !inherits(nir, "numeric")) {
+    stop("green and NIR layers should be indicated with a number")
   }
   
   ndwi = (x[[green]] - x[[nir]]) / (x[[green]] + x[[nir]])
  
   return(ndwi)
-
+  
 }
 
