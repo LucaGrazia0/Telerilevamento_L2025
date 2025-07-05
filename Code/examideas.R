@@ -5,7 +5,7 @@ library(terra) #funzione rast() per SpatRaster
 library(imageRy) #funzione im.plotRGB()
 library(viridis) #serve per creare plot di immagini con differenti palette di colori di viridis
 library(ggridges) #permette di creare i plot ridgeline
-
+library(ggplot2) #permette di attuare la classificazione tramite  ggplot
 
 
 # I due codici seguenti utilizzano il linguaggio di programmazione java script all'interno della piattaforma Google Earth Engine per ottenere le immagini relative al paese di Blatten e  frana staccatasi da ghiacciaio Birch il 28 maggio 2025
@@ -311,6 +311,55 @@ im.multiframe(1,2)
 plot(blatten_diff, main = "BLATTEN PRIMA E DOPO:\ndifferenza banda del rosso")
 plot(blatten_NDVIdiff, main = "BLATTEN PRIMA E DOPO:\ndifferenza NDVI")
 
+#inserire la mia funzione
 
 
+# Per visualizzare graficamente la frequenza dei pixel di ogni immagine per ciascun valore di NDVI si è poi fatta un'analisi ridgeline per apprezzare eventuali variazioni nel tempo nella frequenza di NDVI.
+#fare un draw?
+blatten_ridl=c(NDVIprima, NDVIdopo)
+names(blatten_ridl) =c("NDVI MAGGIO", "NDVI Giugno")
+png("blatten_ridgeline.png")
+im.ridgeline(blatten_ridl, scale=1, palette="inferno")    # applico la funzione im.ridgeline
+dev.off()
 
+
+# visualizzare la variazione percentuale di NDVI nel sito, tramite un grafico a barre tramite il pacchetto ggplot2
+blatten_maggio_class = im.classify(NDVIprima, num_clusters=2)            # divido i pixel di ogni immagine in due classi a seconda dei valori
+blatten_giugno_class = im.classify(NDVIdopo, num_clusters=2)
+
+png("visualizzazione_classi_ndvi.png")                                                 # plotto le immagini con i pixel suddivisi nei due cluster per vedere come sono stati classificati e la differenza tra esse
+im.multiframe(2,2)
+plot(blatten_maggio_class, main = "Pixel prima della frana")
+plot(blatten_giugno_class, main = "Pixel dopo la frana")
+plot(blatten_maggio_class - blatten_giugno_class, main = "Differenza Pixel NDVI blatten\n(maggio-giugno)")
+dev.off()
+
+percentuale_maggio = freq(blatten_maggio_class) * 100 / ncell(blatten_maggio_class)
+      layer        value    count
+1 6.573217e-05 6.573217e-05 68.71727
+2 6.573217e-05 1.314643e-04 31.28273
+
+percentuale_giugno = freq(blatten_giugno_class) * 100 / ncell(blatten_giugno_class)
+layer        value    count
+1 6.573217e-05 6.573217e-05 59.51122
+2 6.573217e-05 1.314643e-04 40.48878
+
+#forse è da cambiare alto e basso
+NDVI = c("alto", "basso")                                            # creo vettore con i nomi dei due cluster (valore elevato e basso di NDVI)
+maggio = c(68.7, 31.3)                                               # creo vettore con le percentuali per ciascun anno
+giugno = c(59.5, 40.5)
+tabout = data.frame(NDVI, maggio, giugno)  
+
+NDVI maggio giugno
+1  alto   68.7   59.5
+2 basso   31.3   40.5
+
+ggplotmaggio = ggplot(tabout, aes(x=NDVI, y=maggio, fill=NDVI, color=NDVI)) + geom_bar(stat="identity") + ylim(c(0,100))
+ggplotgiugno = ggplot(tabout, aes(x=NDVI, y=giugno, fill=NDVI, color=NDVI)) + geom_bar(stat="identity") + ylim(c(0,100))
+
+png("ggplot.png")
+ggplotmaggio + ggplotgiugno
++ plot_annotation(title = "Valori NDVI (espressi in superficie) nell'area di Blatten")    # creo grafico con entrambi i ggplot creati
+dev.off()
+
+#molto probabilmente sfasato dallo scioglimento della neve
