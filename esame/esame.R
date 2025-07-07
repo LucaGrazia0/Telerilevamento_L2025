@@ -9,7 +9,7 @@ library(ggplot2) #permette di creare grafici a barre
 
 
 #Cosa analizzerò:
-#il seguente documento analizza come, nell'area del paese di blatten (comune del canton Vallese), sia avvenuta una variazione della copertura del suolo a seguito di una frana staccatasi dal ghiacciaio Birch il 28 maggio 2025.
+#il seguente documento analizza come, nell'area del paese di blatten (comune del canton Vallese), sia avvenuta una variazione della copertura del suolo a seguito di una frana staccatasi dal ghiacciaio Birch il 28 maggio 2025 e la conseguente formazione di un lago creatosi dallo sbarramento duvuto alla frana.
 #La variazione viene analizzata attraverso l'applicazione di indici spettrali e analisi multitemporale
 
 #Ricerca dei dati:
@@ -188,12 +188,12 @@ Export.image.toDrive({
 
 
 
-#Analisi dei dati satellitari
-#usando Google Earth Engine scarico e salvo le immagini su google drive, sucessivamente eseguo il download salvandole in formato .tif
+#Analisi dei dati satellitari:
+  #usando Google Earth Engine scarico e salvo le immagini su google drive, sucessivamente eseguo il download salvandole in formato .tif
 
 setwd("/Users/lucagrazia/Downloads") #imposto la working directory
 
-#blattenpre
+  #plotto immagine "blattenpre" che si riferisce al mese precedente alla frana
 blattenpre=rast("blattenpre1.tif") #importo il raster attraverso la funzione rast() di terra e lo nomino
 plot(blattenpre) #plotto l'immagine per visuallizzarla
 plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima") #plot RGB per visualizzare l'immagine nello spettro del visibile, Stretch lineare: i valori vengono riscalati linearmente tra 0 e 255 per visualizzare meglio l'immagine.
@@ -202,10 +202,82 @@ dev.off()
 
 #ripeto la stessa funzione con la seconda immagine 
 
-#blattenpost
+  #plotto immagine "blattenpost" che si riferisce al mese successivo alla frana
 blattenpost=rast("blattenpostNIR.tif") #importo il raster attraverso la funzione rast() di terra e lo nomino
 plot(blattenpost) #plotto l'immagine per visuallizzarla
 plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo") #plot RGB per visualizzare l'immagine nello spettro del visibile, Stretch lineare: i valori vengono riscalati linearmente tra 0 e 255 per visualizzare meglio l'immagine.
 dev.off()
+
+#dato che ho scaricato e visualizzato le due immagini singolarmente ora imposto un pannello multiframe per visualizzarle entrambe 
+
+png("blattenrgb.png") #funzione che mi permette di salvare una copia dell'immagine in formato.png
+im.multiframe(1,2) #con questa funzione apro un pannello multiframe che mi permette di vedere le 2 immagini una affiancate (una linea, due colonne) 
+plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima")
+plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo")
+dev.off()
+
+
+# Confronto le due immagini mettendo in risalto solo le corrispettive al Near Infra-Red, cioè la banda 8: 
+
+png("blattenbandaNIR.png")
+im.multiframe(1,2) 
+plot(blattenpre[[4]], stretch="lin", main = "BlattenpreNIR", col=inferno(100)) #attraverso viridis utilizza la palette di colori "inferno" specificando il numero di colori che voglio nella scala per uniformarlo alla seconda immagine
+plot(blattenpost[[4]], stretch="lin", main = "BlattenpostNIR", col=inferno(100))
+dev.off()
+
+# Visualizzazione del suolo nudo rispetto alla vegetazione impostando sulla banda del blu la banda dell'infrarosso in, questo fa risaltare la vegetazione di colore blu e tutto quello che non è vegetazione nella sccala del giallo, solitamente è usato per evidenziare il suolo nudo:
+
+png("blattensuolonudo.png")
+im.multiframe(1,2)
+plotRGB(blattenpre, r = 1, g = 2, b = 4, stretch="lin", main = "Blatten Prima") 
+plotRGB(blattenpost, r = 1, g = 2, b = 4, stretch="lin", main = "Blatten Dopo")
+dev.off()
+
+#si può notare che il colore blu è aumentato nella seconda immagine probabilemte perché è avvenuto uno scioglimento rapido della copertura nevosa
+
+#INDICI SPETTRALI 
+
+#DIFFERENT VEGETATION INDEX - DVI
+  #Questo indice che ci dà informazione sullo stato di salute delle piante attraverso la riflettanza della vegetazione nelle bande del rosso e NIR. In caso di stress le cellule a palizzata collassano, allora quindi la riflettanza nel NIR sarà più bassa.
+  #Calcolo: DVI= NIR - red
+
+DVIpre=im.dvi(blattenpre, 4, 1) #funzione im.dvi di imageRy che prende l'immagine da analizzare e automaticamente sottrae dal NIR la banda del RED
+plot(DVIpre, col=inferno(100))
+dev.off()
+
+DVIpost=im.dvi(blattenpost, 4, 1) 
+plot(DVIpost, col=inferno(100))
+dev.off()
+
+# Creo un pannello multiframe per confrontare le immagini su cui è stato calcolalto il DVI:
+png("blattenDVI.png")
+im.multiframe(1,2)
+plot(DVIpre, stretch = "lin", main = "pre_frana", col=inferno(100))
+plot(DVIpost, stretch = "lin", main = "post_frana", col=inferno(100))
+dev.off()
+
+#nelle immagini si vede chiaramente la distribuzione della biomassa vegetale (visibile in giallo) che si protrae nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della frana rappresentato da un'area più scura 
+
+
+#NORMALIZED DIFFERENCE VEGETATION INDEX
+  #Un secondo indice per l'analisi della vegetazione, dato che i valori vengono normalizzati  tra -1 e +1 possiamo attuare analisi che sono state acquisite in tempi diversi come ad esempio nel caso di Blatten per verificare l'impatto della frana.
+  # Calcolo: NDVI= (NIR - red) / (NIR + red)
+
+NDVIprima =im.ndvi(blattenpre, 4, 1) #anche in questo caso attraverso la funzione im.ndvi() di imageRy si semplifica il calcolo
+plot(NDVIprima, stretch = "lin", main = "NDVIpre", col=inferno(100))
+dev.off()
+
+NDVIdopo =im.ndvi(blattenpost, 4, 1) 
+plot(NDVIdopo, stretch = "lin", main = "NDVIpost", col=inferno(100))
+dev.off()
+
+png("blattenNDVI.png")
+im.multiframe(1,2)
+plot(NDVIprima, stretch = "lin", main = "NDVIprima_frana", col=inferno(100))
+plot(NDVIdopo, stretch = "lin", main = "NDVIdopo_frana", col=inferno(100))
+dev.off()
+
+#nella prima imamgine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza elevata di neve,mostrando comunque vaolori vicini allo 0.8; nella seconda immagine è presente una grossa massa inerte nel centro che è rappresentata dalla frana.
+
 
 
