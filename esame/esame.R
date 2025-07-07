@@ -326,3 +326,6 @@ plot(NDWIdopo, stretch = "lin", main = "NDWI_dopo", col=inferno(100))
 dev.off()
 
 #si può notare agevolmente un accumulo di acqua a mmonte della frana dovuto allo sbarramento del torrente Lonza
+
+
+#ANALISI MULTITEMPORALE
