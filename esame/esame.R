@@ -279,5 +279,50 @@ dev.off()
 
 #nella prima imamgine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza elevata di neve,mostrando comunque vaolori vicini allo 0.8; nella seconda immagine è presente una grossa massa inerte nel centro che è rappresentata dalla frana.
 
+#NORMALIZED DIFFERENCE WATER INDEX 
+  # Indice usato in telerilevamento per identificare l'acqua superficiale nelle immagini satellitari.
+  # NDWI= (Green-NIR)/(Green+NIR)
+
+#pre
+diffpre=blattenpre[[2]]-blattenpre[[4]]
+sumpre=blattenpre[[2]]+blattenpre[[4]]
+NDWI_pre=diffpre/sumpre
+plot(NDWI_pre)
+
+#post
+diffpost=blattenpost[[2]]-blattenpost[[4]]
+sumpost=blattenpost[[2]]+blattenpost[[4]]
+NDWI_post=diffpost/sumpost
+plot(NDWI_post)
+
+# guardando il funzionamento della funzione im.ndvi(), dato che è simile a ndvi, ho cercato di cambiare i dati immessi per crearne una che potesse restituirmi NDWI
+im.ndwi <- function(x, green, nir){
+  
+  if(!inherits(x, "SpatRaster")) {
+    stop("Input image should be a SpatRaster object.")
+  }
+  
+  if(!inherits(green, "numeric") && !inherits(nir, "numeric")) {
+    stop("green and NIR layers should be indicated with a number")
+  }
+  
+  ndwi = (x[[green]] - x[[nir]]) / (x[[green]] + x[[nir]])
+ 
+  return(ndwi)
+  
+}
+
+NDWIprima= im.ndwi(blattenpre,2,4)
+plot(NDWIprima, stretch = "lin", main = "NDWI_prima", col=inferno(100))
 
 
+NDWIdopo=im.ndwi(blattenpost,2,4)
+plot(NDWIdopo, stretch = "lin", main = "NDWI_dopo", col=inferno(100))
+
+png("blattenNDWI.png")
+im.multiframe(1,2)
+plot(NDWIprima, stretch = "lin", main = "NDWI_prima", col=inferno(100))
+plot(NDWIdopo, stretch = "lin", main = "NDWI_dopo", col=inferno(100))
+dev.off()
+
+#si può notare agevolmente un accumulo di acqua a mmonte della frana dovuto allo sbarramento del torrente Lonza
