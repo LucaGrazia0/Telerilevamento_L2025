@@ -6,6 +6,7 @@ library(imageRy) #visualizzazione e analisi immagini
 library(viridis) #serve per creare plot di immagini con differenti palette di colori 
 library(ggridges) #permette di creare i plot ridgeline
 library(ggplot2) #permette di creare grafici a barre
+library(patchwork) # package needed to couple graphs
 
 
 #Cosa analizzerò:
@@ -350,4 +351,65 @@ dev.off()
 
 #i valori che si possono vedere sono molto descrittivi dell'area, abbiamo infatti un picco a maggio dovuto a valori intorno allo 0 che indicano principalmente l'alta quantità di neve 
 #nel mese di giugno si vede un aumento nei valori compresi tra 0 e 0.1 che indicano il nutevole ammasso di rocce e materiali inerti staccatosi dal versante dela montagna, si nota anche un aumento della vegetaizione circostante
+
+
+#Classificazione immagini
+  # visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, mostro la variazione 
+blatten_maggio_class = im.classify(NDVIprima, num_clusters=2)            # divido i pixel di ogni immagine in due cluster per capire come sono stati classificati  
+blatten_giugno_class = im.classify(NDVIdopo, num_clusters=2)
+
+png("visualizzazione_classi_ndvi.png")
+im.multiframe(2,2)
+plot(blatten_maggio_class, main = "Pixel prima della frana")
+plot(blatten_giugno_class, main = "Pixel dopo la frana")
+plot(blatten_maggio_class - blatten_giugno_class, main = "Differenza Pixel NDVI blatten\n(maggio-giugno)")
+dev.off()
+
+#valori:
+  #1 valori bassi NDVI -> neve, roccia e materiale inerte
+  #2 valori alti NDVI -> vegetazione
+
+  #la differenza è visibile attraverso il colore giallo che mostra una modifica sostanziale 
+
+#calcolo frequenza con freq() per contare il numero di celle (pixel) per ciascun valore presente in un oggetto raster
+#ncell per capire il totale di pixel 
+#per le proporzioni si fa freq/tot per conoscere la percentuale di immagine coperta da ciascuna classe. È fondamentale per interpretare, confrontare e analizzare i risultati di una classificazione raster.
+
+percentuale_maggio = freq(blatten_maggio_class) * 100 / ncell(blatten_maggio_class)
+percentuale_maggio
+      layer        value    count
+1 6.573217e-05 6.573217e-05 68.71727    #classe 1 è 68.72%
+2 6.573217e-05 1.314643e-04 31.28273    #classe 2 è 31.28%
+
+percentuale_giugno = freq(blatten_giugno_class) * 100 / ncell(blatten_giugno_class)
+percentuale_giugno
+layer        value    count
+1 6.573217e-05 6.573217e-05 59.51122     #classe 1 è 59.50%
+2 6.573217e-05 1.314643e-04 40.48878     #classe 2 è 40.50%
+
+NDVI = c("basso", "elevato")                  # creo vettore in cui inserisco i nomi relativi ai valori NDVI
+maggio = c(68.7, 31.3)                        # creo vettore con le percentuali relative al mese di maggio
+giugno = c(59.5, 40.5)                        # creo vettore con le percentuali relative al mese di giugno 
+tabout = data.frame(NDVI, maggio, giugno)     #creo dataframe
+
+tabout
+     NDVI  maggio giugno
+1   basso   68.7   59.5
+2 elevato   31.3   40.5
+
+
+#funzione ggplot, funzione di base per fare i plot:
+  #tabout è il valore in imput
+  #aes imposta le aesthetic mappings (cioè, cosa va sull’asse X e sull’asse Y, riempimento e colore)
+  #geom_bar serve per descrivere il tipo di grafico bar=istogramm
+  #ylim(c(0,100)) per mantere univoca una scala di riproduzione
+
+ggplotmaggio = ggplot(tabout, aes(x=NDVI, y=maggio, fill=NDVI, color=NDVI)) + geom_bar(stat="identity") + ylim(c(0,100))
+ggplotgiugno = ggplot(tabout, aes(x=NDVI, y=giugno, fill=NDVI, color=NDVI)) + geom_bar(stat="identity") + ylim(c(0,100))
+
+png("ggplot.png") 
+ggplotmaggio + ggplotgiugno
++ plot_annotation(title = "Valori NDVI (espressi in superficie) nell'area di Blatten")    # creo un plot con i due grafici, plot annotation mi serve per aggiungere un titolo
+dev.off()
+
 
