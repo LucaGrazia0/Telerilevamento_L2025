@@ -423,13 +423,52 @@ dev.off()
 ![visualizzazione_classi_ndvi1](https://github.com/user-attachments/assets/857f3ab1-554c-47ab-ba6f-1bd20dcff57f)
 
 valori:
-+1 valori NDVI -> vegetazione
-+2 valori NDVI -> roccia
++ 1 valori alti NDVI -> vegetazione
++ 2 valori bassi NDVI -> roccia
 
-la differenza è visibile attraverso il colore viola che mostra una differenza sostanziale evidenziando l'area della frana
+La differenza è visibile attraverso il colore viola che mostra una differenza sostanziale evidenziando l'area della frana
 
 Alcune informazioni:
-+calcolo frequenza con freq() per contare il numero di celle (pixel) per ciascun valore presente in un oggetto raster
-+ncell per capire il totale di pixel 
-+per le proporzioni si fa freq/tot per conoscere la percentuale di immagine coperta da ciascuna classe. È fondamentale per interpretare, confrontare e analizzare i risultati di una classificazione raster.
++ calcolo frequenza con freq() per contare il numero di celle (pixel) per ciascun valore presente in un oggetto raster
++ ncell per capire il totale di pixel 
++ per le proporzioni si fa freq/tot per conoscere la percentuale di immagine coperta da ciascuna classe. È fondamentale per interpretare, confrontare e analizzare i risultati di una classificazione raster.
 
+Trovo le percentuali
+```R
+percentuale_maggio = freq(blatten_maggio_classi) * 100 / ncell(blatten_maggio_classi)
+percentuale_maggio
+         layer       value    count
+1 0.000652018 0.000652018 66.15309    #classe 1 è 66%
+2 0.000652018 0.001304036 33.84691    #classe 2 è 34%
+
+
+percentuale_giugno = freq(blatten_giugno_classi) * 100 / ncell(blatten_giugno_classi)
+percentuale_giugno
+ layer       value    count
+1 0.000652018 0.000652018 60.91543    #classe 1 è 61%
+2 0.000652018 0.001304036 39.08457    #classe 2 è 39%
+
+NDVI = c("basso", "elevato")              # creo vettore in cui inserisco i nomi relativi ai valori NDVI
+maggio = c(34, 66)                        # creo vettore con le percentuali relative al mese di maggio
+giugno = c(39, 61)                        # creo vettore con le percentuali relative al mese di giugno 
+tabout = data.frame(NDVI, maggio, giugno)     #creo dataframe
+
+tabout
+     NDVI   maggio giugno
+1   basso     34     39
+2 elevato     66     61
+
+```
+
+Attraverso la funzione ggplot che è funzione di base per fare i plot grafici, li sviluppo e poi unisco i grafici:
+```R
+ggplotmaggio1 = ggplot(tabout, aes(x=NDVI, y=maggio, fill=NDVI, color=NDVI)) + geom_bar(stat="identity") + ylim(c(0,100))
+ggplotgiugno1 = ggplot(tabout, aes(x=NDVI, y=giugno, fill=NDVI, color=NDVI)) + geom_bar(stat="identity") + ylim(c(0,100))
+
+png("ggplot1.png") 
+ggplotmaggio1 + ggplotgiugno1
++ plot_annotation(title = "Valori NDVI (espressi in superficie) nell'area di Blatten")    # creo un plot con i due grafici, plot annotation mi serve per aggiungere un titolo
+dev.off()
+```
+![ggplot1](https://github.com/user-attachments/assets/98c1bde2-15d3-4f3f-ad3b-a08d1865a10b)
+>*in questo grafico si può vedere come nonostante lo scioglimento della neve che ha aumentato la vegetazione facendo aumetare i valori alti di NDVI, i valori bassi, a seguito della frana, siano comunque aumentati in area*
