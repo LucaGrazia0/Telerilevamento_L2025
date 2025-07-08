@@ -12,7 +12,7 @@ In particolare è stata confrontata l'area attraverso due immagini che si riferi
 + dal **30/05** al **30/06**, il mese successivo alla frana
 
 ![image](https://github.com/user-attachments/assets/34b45dbb-6912-4c2b-924f-9135dd4f9c52)
->*l'area presa in considerazione, valle del Lötschental, distretto di Raron Occidentale*
+>*l'area presa in considerazione, Lötschental, distretto di Raron Occidentale*
 
 
 ## Acquisizione delle immagini satellitari 🛰️📡
@@ -348,4 +348,21 @@ dev.off()
 >* in giallo si può notare un accumulo di acqua del torrente Lonza a monte della frana dovuto allo sbarramento della massa rocciosa*
 
 ### Analisi Multitemporale
+Analisi attraverso R per vedere come un'area specifica cambia nel tempo, in questo caso si analizza:
++ **banda del rosso**, molto sensibile alla vegetazione e ai materiali di superficie
++ **NDVI**
+
+```R
+blatten_diff=blattenpre[[1]]-blattenpost[[1]] #rosso
+blatten_NDVIdiff=NDVIprima-NDVIdopo
+
+png("blattenmultitemp.png")
+im.multiframe(1,2)
+plot(blatten_diff, main = "BLATTEN PRIMA E DOPO:\ndifferenza banda del rosso", col=rocket(100)) #La banda del rosso (Red) è molto sensibile alla vegetazione e ai materiali di superficie.
+plot(blatten_NDVIdiff, main = "BLATTEN PRIMA E DOPO:\ndifferenza NDVI", col=rocket(100)) #differenza NDVI tra le due immagini, visibile la frana
+dev.off()
+```
+![blattenmultitemp](https://github.com/user-attachments/assets/16e29cd7-5d7a-4e06-a456-effed93f37f3)
+>*è visibile una zona di colore diverso nel centro dell'immagine che corrisponde alla frana*
+
 
