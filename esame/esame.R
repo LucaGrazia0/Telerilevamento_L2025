@@ -372,8 +372,8 @@ dev.off()
 
 #Classificazione immagini
   # visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, mostro la variazione 
-blatten_maggio_class = im.classify(NDVIprima, num_clusters=2)            # divido i pixel di ogni immagine in due cluster per capire come sono stati classificati  
-blatten_giugno_class = im.classify(NDVIdopo, num_clusters=2)
+blatten_maggio_class = im.classify(blatten_ndvi_pre_crop, num_clusters=2)            # divido i pixel di ogni immagine in due cluster per capire come sono stati classificati  
+blatten_giugno_class = im.classify(blatten_ndvi_post_crop, num_clusters=2)
 
 png("visualizzazione_classi_ndvi.png")
 im.multiframe(2,2)
