@@ -329,3 +329,25 @@ dev.off()
 
 
 #ANALISI MULTITEMPORALE
+  #Analisi attraverso R per vedere come un'area specifica cambia nel tempo
+
+blatten_diff=blattenpre[[1]]-blattenpost[[1]] #rosso
+blatten_NDVIdiff=NDVIprima-NDVIdopo
+
+png("blattenmultitemp.png")
+im.multiframe(1,2)
+plot(blatten_diff, main = "BLATTEN PRIMA E DOPO:\ndifferenza banda del rosso", col=rocket(100)) #La banda del rosso (Red) è molto sensibile alla vegetazione e ai materiali di superficie.
+plot(blatten_NDVIdiff, main = "BLATTEN PRIMA E DOPO:\ndifferenza NDVI", col=rocket(100)) #differenza NDVI tra le due immagini, visibile la frana
+dev.off()
+
+
+
+blatten_ridg=c(NDVIprima, NDVIdopo) #creazione vettore per visualizzare le due immagini contemporaneamente
+names(blatten_ridg) =c("NDVI MAGGIO", "NDVI Giugno") #vettore con i nomi relativi alle due immagini
+png("blatten_ridgeline.png")
+im.ridgeline(blatten_ridg, scale=1, palette="viridis")    # applico la funzione im.ridgeline del pacchetto imageRy
+dev.off()
+
+#i valori che si possono vedere sono molto descrittivi dell'area, abbiamo infatti un picco a maggio dovuto a valori intorno allo 0 che indicano principalmente l'alta quantità di neve 
+#nel mese di giugno si vede un aumento nei valori compresi tra 0 e 0.1 che indicano il nutevole ammasso di rocce e materiali inerti staccatosi dal versante dela montagna, si nota anche un aumento della vegetaizione circostante
+
