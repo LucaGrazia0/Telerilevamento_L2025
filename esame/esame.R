@@ -341,16 +341,33 @@ plot(blatten_diff, main = "BLATTEN PRIMA E DOPO:\ndifferenza banda del rosso", c
 plot(blatten_NDVIdiff, main = "BLATTEN PRIMA E DOPO:\ndifferenza NDVI", col=rocket(100)) #differenza NDVI tra le due immagini, visibile la frana
 dev.off()
 
+#funzione draw di terra
+plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten_POST (RGB)")
+crop_blatten = draw(x="extent", col="red", lwd=2) #rettangolo, rosso, di spessore 2
+blatten_post_crop = crop(blattenpost, crop_blatten)
+blatten_pre_crop = crop(blattenpre, crop_blatten)
 
+blatten_ndvi_pre_crop = crop(NDVIprima, crop_blatten)
+blatten_ndvi_post_crop = crop(NDVIdopo, crop_blatten)
 
-blatten_ridg=c(NDVIprima, NDVIdopo) #creazione vettore per visualizzare le due immagini contemporaneamente
-names(blatten_ridg) =c("NDVI MAGGIO", "NDVI Giugno") #vettore con i nomi relativi alle due immagini
-png("blatten_ridgeline.png")
-im.ridgeline(blatten_ridg, scale=1, palette="viridis")    # applico la funzione im.ridgeline del pacchetto imageRy
+png("blattencrop.png")
+im.multiframe(2,2)                                           # creo multiframe e plotto le nuove immagini croppate
+plotRGB(blatten_pre_crop, r = 1, g = 2, b = 3, stretch = "lin", main = "maggio")
+plotRGB(blatten_post_crop, r = 1, g = 2, b = 3, stretch = "lin", main = "giugno")
+plot(blatten_ndvi_pre_crop, main = "NDVI maggio")
+plot(blatten_ndvi_post_crop, main = "NDVI giugno")
 dev.off()
+
+blatten_ridg=c(blatten_ndvi_pre_crop, blatten_ndvi_post_crop) #creazione vettore per visualizzare le due immagini contemporaneamente
+names(blatten_ridg) =c("NDVI MAGGIO", "NDVI GIUGNO") #vettore con i nomi relativi alle due immagini
+png("blatten_ridgeline1.png")
+im.ridgeline(blatten_ridg, scale=0.5, palette="viridis")    # applico la funzione im.ridgeline del pacchetto imageRy
+dev.off()
+
 
 #i valori che si possono vedere sono molto descrittivi dell'area, abbiamo infatti un picco a maggio dovuto a valori intorno allo 0 che indicano principalmente l'alta quantità di neve 
 #nel mese di giugno si vede un aumento nei valori compresi tra 0 e 0.1 che indicano il nutevole ammasso di rocce e materiali inerti staccatosi dal versante dela montagna, si nota anche un aumento della vegetaizione circostante
+
 
 
 #Classificazione immagini
