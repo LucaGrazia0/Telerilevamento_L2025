@@ -365,4 +365,39 @@ dev.off()
 ![blattenmultitemp](https://github.com/user-attachments/assets/16e29cd7-5d7a-4e06-a456-effed93f37f3)
 >*è visibile una zona di colore diverso nel centro dell'immagine che corrisponde alla frana*
 
+applico la funzione **draw del pacchetto terra** per selezionare un'area meno ampia dell'immagine e attuare le analisi ulteriori
+```R
+#funzione draw di terra
+plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten_POST (RGB)")
+crop_blatten = draw(x="extent", col="red", lwd=2) #rettangolo, rosso, di spessore 2
+blatten_post_crop = crop(blattenpost, crop_blatten)
+blatten_pre_crop = crop(blattenpre, crop_blatten)
+
+blatten_ndvi_pre_crop = crop(NDVIprima, crop_blatten)
+blatten_ndvi_post_crop = crop(NDVIdopo, crop_blatten)
+
+png("blattencrop.png")
+im.multiframe(2,2) # creo multiframe
+plotRGB(blatten_pre_crop, r = 1, g = 2, b = 3, stretch = "lin", main = "maggio")
+plotRGB(blatten_post_crop, r = 1, g = 2, b = 3, stretch = "lin", main = "giugno")
+plot(blatten_ndvi_pre_crop, main = "NDVI maggio")
+plot(blatten_ndvi_post_crop, main = "NDVI giugno")
+dev.off()
+```
+![blattencrop](https://github.com/user-attachments/assets/271554fb-c7dd-4369-be99-73942de5aed7)
+>*le aree selezionate*
+
+
+
+```R
+blatten_ridg=c(blatten_ndvi_pre_crop, blatten_ndvi_post_crop) #creazione vettore per visualizzare le due immagini contemporaneamente
+names(blatten_ridg) =c("NDVI MAGGIO", "NDVI GIUGNO") #vettore con i nomi relativi alle due immagini
+png("blatten_ridgeline1.png")
+im.ridgeline(blatten_ridg, scale=0.5, palette="viridis")    # applico la funzione im.ridgeline del pacchetto imageRy
+dev.off()
+```
+
+![blatten_ridgeline1](https://github.com/user-attachments/assets/9db5216c-33bd-4005-a502-7fcffad90b6a)
+
+
 
