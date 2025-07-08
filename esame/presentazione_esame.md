@@ -279,5 +279,73 @@ dev.off()
 #### NORMALIZED DIFFERENCE VEGETATION INDEX
 Un secondo indice per l'analisi della vegetazione, dato che i valori vengono normalizzati  tra -1 e +1 possiamo attuare analisi su immagini che sono state acquisite in tempi diversi come ad esempio nel caso di Blatten per verificare l'impatto della frana.
 Calcolo: NDVI= (NIR - red) / (NIR + red)
+```R
+NDVIprima =im.ndvi(blattenpre, 4, 1) #anche in questo caso attraverso la funzione im.ndvi() di imageRy si semplifica il calcolo
+plot(NDVIprima, stretch = "lin", main = "NDVIprima_frana", col=inferno(100))
+dev.off()
+
+NDVIdopo =im.ndvi(blattenpost, 4, 1) 
+plot(NDVIdopo, stretch = "lin", main = "NDVIdopo_frana", col=inferno(100))
+dev.off()
+
+png("blattenNDVI.png")
+im.multiframe(1,2)
+plot(NDVIprima, stretch = "lin", main = "NDVIprima_frana", col=inferno(100))
+plot(NDVIdopo, stretch = "lin", main = "NDVIdopo_frana", col=inferno(100))
+dev.off()
+```
+![blattenNDVI](https://github.com/user-attachments/assets/70af042c-ede0-4369-9b24-bfa112a2e277)
+>*nella prima imamgine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza cospicua di neve, mostrando comunque vaolori vicini allo 0.8; nella seconda immagine rimane sempre una vegetazione florida ma è presente una grossa massa inerte nel centro che è rappresentata dalla frana.*
+
+#### NORMALIZED DIFFERENCE WATER INDEX 
+Indice usato in telerilevamento per identificare l'acqua superficiale nelle immagini satellitari.
+NDWI= (Green-NIR)/(Green+NIR)
+```R
+#pre
+diffpre=blattenpre[[2]]-blattenpre[[4]]
+sumpre=blattenpre[[2]]+blattenpre[[4]]
+NDWI_pre=diffpre/sumpre
+plot(NDWI_pre)
+
+#post
+diffpost=blattenpost[[2]]-blattenpost[[4]]
+sumpost=blattenpost[[2]]+blattenpost[[4]]
+NDWI_post=diffpost/sumpost
+plot(NDWI_post)
+```
+Osservando il funzionamento della funzione im.ndvi(), ho notato una certa somiglianza al calcolo dell'indice NDWI, ho cercato quindi di cambiare i parametri immessi per creare una funzione che potesse restituirmi NDWI velocemente
+
+``` R
+#imposto la funzione 
+im.ndwi <- function(x, green, nir){
+  
+  if(!inherits(x, "SpatRaster")) {
+    stop("Input image should be a SpatRaster object.")
+  }
+  
+  if(!inherits(green, "numeric") && !inherits(nir, "numeric")) {
+    stop("green and NIR layers should be indicated with a number")
+  }
+  
+  ndwi = (x[[green]] - x[[nir]]) / (x[[green]] + x[[nir]])
+ 
+  return(ndwi)
+  
+}
+
+#utilizzo la funzione
+NDWIprima= im.ndwi(blattenpre,2,4)
+NDWIdopo=im.ndwi(blattenpost,2,4)
+
+png("blattenNDWI.png")
+im.multiframe(1,2)
+plot(NDWIprima, stretch = "lin", main = "NDWI_prima", col=inferno(100))
+plot(NDWIdopo, stretch = "lin", main = "NDWI_dopo", col=inferno(100))
+dev.off()
+```
+![blattenNDWI](https://github.com/user-attachments/assets/3e21f934-881a-492a-8038-b3d0278bac5c)
+
+>* in giallo si può notare un accumulo di acqua del torrente Lonza a monte della frana dovuto allo sbarramento della massa rocciosa*
+
 ### Analisi Multitemporale
 
