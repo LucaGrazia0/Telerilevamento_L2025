@@ -296,7 +296,7 @@ sumpost=blattenpost[[2]]+blattenpost[[4]]
 NDWI_post=diffpost/sumpost
 plot(NDWI_post)
 
-# guardando il funzionamento della funzione im.ndvi(), dato che è simile a ndvi, ho cercato di cambiare i dati immessi per crearne una che potesse restituirmi NDWI
+# guardando il funzionamento della funzione im.ndvi(), dato che è simile al calcolo di ndwi, ho cercato di cambiare i dati immessi per crearne una che potesse restituirmi NDWI
 im.ndwi <- function(x, green, nir){
   
   if(!inherits(x, "SpatRaster")) {
