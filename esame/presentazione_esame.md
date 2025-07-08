@@ -254,6 +254,30 @@ dev.off()
 
 ## Analisi immagini 
 ### Indici spettrali
+##### DIFFERENT VEGETATION INDEX - DVI
+Questo indice che ci dà informazione sullo stato di salute delle piante attraverso la riflettanza della vegetazione nelle bande del rosso e NIR. In caso di stress le cellule a palizzata diminuiscono la loro capacità fotosintetica per ridurre la perdita d'acqua, per cui la riflettanza nel NIR sarà più bassa.
+Calcolo: DVI= NIR - red
+```R
+DVIpre=im.dvi(blattenpre, 4, 1) #funzione im.dvi di imageRy che prende l'immagine da analizzare e automaticamente sottrae dal NIR la banda del RED
+plot(DVIpre, col=inferno(100))
+dev.off()
 
+DVIpost=im.dvi(blattenpost, 4, 1) 
+plot(DVIpost, col=inferno(100))
+dev.off()
+
+#Creo un pannello multiframe per confrontare le immagini su cui è stato calcolalto il DVI:
+png("blattenDVI.png")
+im.multiframe(1,2)
+plot(DVIpre, stretch = "lin", main = "pre_frana", col=inferno(100))
+plot(DVIpost, stretch = "lin", main = "post_frana", col=inferno(100))
+dev.off()
+```
+![blattenDVI](https://github.com/user-attachments/assets/eeed0cf9-7636-49d7-afbd-700a490742d5)
+>*si vede chiaramente la distribuzione della biomassa vegetale (visibile in giallo) che si estende nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della frana rappresentato da un'area più scura*
+
+#### NORMALIZED DIFFERENCE VEGETATION INDEX
+Un secondo indice per l'analisi della vegetazione, dato che i valori vengono normalizzati  tra -1 e +1 possiamo attuare analisi su immagini che sono state acquisite in tempi diversi come ad esempio nel caso di Blatten per verificare l'impatto della frana.
+Calcolo: NDVI= (NIR - red) / (NIR + red)
 ### Analisi Multitemporale
 
