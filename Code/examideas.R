@@ -310,9 +310,14 @@ png("blattenmultitempo.png")
 im.multiframe(1,2)
 plot(blatten_diff, main = "BLATTEN PRIMA E DOPO:\ndifferenza banda del rosso")
 plot(blatten_NDVIdiff, main = "BLATTEN PRIMA E DOPO:\ndifferenza NDVI")
-
+dev.off()
 #inserire la mia funzione
 
+Nel contesto delle immagini satellitari (es. Landsat, Sentinel, immagini a colori naturali):
+
+La banda del rosso (Red) è molto sensibile alla vegetazione e ai materiali di superficie.
+Le foglie sane assorbono fortemente il rosso per la fotosintesi → meno riflettanza → pixel scuri.
+Superfici nude, cemento, terra → riflettono molto il rosso → pixel più chiari.
 
 # Per visualizzare graficamente la frequenza dei pixel di ogni immagine per ciascun valore di NDVI si è poi fatta un'analisi ridgeline per apprezzare eventuali variazioni nel tempo nella frequenza di NDVI.
 #fare un draw?
