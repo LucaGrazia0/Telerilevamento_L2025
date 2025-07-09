@@ -197,7 +197,7 @@ Export.image.toDrive({
 
 Le immagini restituite sono la mediana composita delle immagini relative al periodo indicato, un filtro ulteriore è stato applicato sciegliendo solo quelle la cui copertura nuvolosa è inferiore al 20%.
 
-## Importazione immagini su R e visualizzazione
+### Importazione immagini su R e visualizzazione
 
 Sono stati utilizzati i seguenti pacchetti per importazione, visualizzazione eanalisi delle immagini:
 + ***terra***, pacchetto per importare immagini e altre funzioni enunciate succesivamente;
