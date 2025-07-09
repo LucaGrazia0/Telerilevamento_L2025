@@ -368,20 +368,20 @@ dev.off()
 ![blattenmultitemp](https://github.com/user-attachments/assets/16e29cd7-5d7a-4e06-a456-effed93f37f3)
 >*È visibile una zona di colore diverso nel centro dell'immagine, nello specifico nella seconda immagine, che corrisponde alla frana*
 
-Applico la funzione **draw del pacchetto terra** per selezionare un'area meno ampia dell'immagine, questo è importante in questo caso perchè lo scioglimento della neve ha modificato rapidamente l'NDVI per cui ho scelto un'area più piccola per attuare le analisi ulteriori
+Applico la funzione **draw del pacchetto terra** per selezionare un'area specifica dell'immagine, questo è importante perchè, in questo caso, lo scioglimento rapido della neve tra meggio e giugno ha portato ad una vigoria maggiore delle piante, per cui ho scelto un'area più piccola per analizzare più efficaciemente.
 
 ```R
 #funzione draw di terra
 plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten_POST (RGB)")
-crop_blatten = draw(x="extent", col="red", lwd=2) #rettangolo, rosso, di spessore 2
-blatten_post_crop = crop(blattenpost, crop_blatten)
-blatten_pre_crop = crop(blattenpre, crop_blatten)
+crop_blatten = draw(x="extent", col="red", lwd=2) #rettangolo, rosso, di spessore 2 creato sull'immagine
+blatten_post_crop = crop(blattenpost, crop_blatten) #blattenpost croppata
+blatten_pre_crop = crop(blattenpre, crop_blatten) #blattenpre croppata
 
-blatten_ndvi_pre_crop = crop(NDVIprima, crop_blatten)
-blatten_ndvi_post_crop = crop(NDVIdopo, crop_blatten)
+blatten_ndvi_pre_crop = crop(NDVIprima, crop_blatten) #ndvi precedente croppato 
+blatten_ndvi_post_crop = crop(NDVIdopo, crop_blatten) #ndvi successivo croppato
 
 png("blattencrop.png")
-im.multiframe(2,2) # creo multiframe
+im.multiframe(2,2) # creo multiframe con le aree croppate e l'NDVI
 plotRGB(blatten_pre_crop, r = 1, g = 2, b = 3, stretch = "lin", main = "maggio")
 plotRGB(blatten_post_crop, r = 1, g = 2, b = 3, stretch = "lin", main = "giugno")
 plot(blatten_ndvi_pre_crop, main = "NDVI maggio")
@@ -389,7 +389,7 @@ plot(blatten_ndvi_post_crop, main = "NDVI giugno")
 dev.off()
 ```
 ![blattencrop](https://github.com/user-attachments/assets/271554fb-c7dd-4369-be99-73942de5aed7)
->*le aree selezionate*
+>*Le aree croppate e le corrispettive con indice NDVI*
 
 Proseguo facendo un'analisi ridgeline sulle immagini croppate che permette di creare due **curve di distribuzione** utili per valutare possibili variazioni nel tempo nella frequenza dell'NDVI
 
@@ -406,37 +406,35 @@ dev.off()
 
 Dal grafico si possono apprezzare due fattori:
 + **NDVI di maggio** può rappresentare una situazione di tarda primavera in zone di alta montagna
-+ **NDVI** di giugno mostra un aumento dei valori di NDVI basso (si nota anche la presenza dello speccio d'acqua) causati dalla presenza della frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
++ **NDVI di giugno** mostra un aumento dei valori di NDVI basso (si nota anche la presenza dello speccio d'acqua dai calori NDVI MOLTO BASSI) causati dalla presenza del materiale inerte portato dalla frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
 
 
 ### Classificazione delle immaigni
 
-Visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, mostro la variazione
+Visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, mostro la variazione.
 ```R
 blatten_maggio_classi = im.classify(blatten_ndvi_pre_crop, num_clusters=2)   # divido i pixel di ogni immagine in due cluster per capire come sono stati classificati  
 blatten_giugno_classi = im.classify(blatten_ndvi_post_crop, num_clusters=2)
 
 png("visualizzazione_classi_ndvi1.png")
-im.multiframe(2,2)
+im.multiframe(2,2) #plotto le due immagini in cui risaltano i due cluster di pixel e la corrispettiva diffrerenza
 plot(blatten_maggio_classi, main = "Pixel prima della frana")
 plot(blatten_giugno_classi, main = "Pixel dopo la frana")
 plot(blatten_maggio_classi - blatten_giugno_classi, main = "Differenza Pixel NDVI blatten\n(maggio-giugno)")
 dev.off()
 ```
 ![visualizzazione_classi_ndvi1](https://github.com/user-attachments/assets/857f3ab1-554c-47ab-ba6f-1bd20dcff57f)
+>*Immagine che mostra le classi in cui sono stati divisi i pixel e la corrispettiva differenza dove, in viola, viene evidenziata la frana rispetto al territorio sottostante*
 
-valori:
-+ 1 valori alti NDVI -> vegetazione
-+ 2 valori bassi NDVI -> roccia
+Valori delle classi:
++ 1 valori **elevati** di NDVI -> vegetazione
++ 2 valori **bassi** di NDVI -> roccia, neve, sassi,...
 
-La differenza è visibile attraverso il colore viola che mostra una differenza sostanziale evidenziando l'area della frana
+Il colore viola mostra la differenza sostanziale tra le due immagini evidenziando l'area colpita
 
-Alcune informazioni:
-+ calcolo frequenza con freq() per contare il numero di celle (pixel) per ciascun valore presente in un oggetto raster
-+ ncell per capire il totale di pixel 
-+ per le proporzioni si fa freq/tot per conoscere la percentuale di immagine coperta da ciascuna classe. È fondamentale per interpretare, confrontare e analizzare i risultati di una classificazione raster.
-
-Trovo le percentuali
+Trovo le percentuali di copertura di ciascuna classe di pixel relativi alle due immagini, per farlo calcolo la frequenza attraverso la funzione freq() di **R** per trovare il numero di celle (pixel) di ciascun valore.
+Successivamente trovo il numero di pixel totali con la funzione ncell() di **R**.
+Applico una divisione, trovo le percentuali e produco un dataframe.
 ```R
 percentuale_maggio = freq(blatten_maggio_classi) * 100 / ncell(blatten_maggio_classi)
 percentuale_maggio
@@ -474,4 +472,7 @@ ggplotmaggio1 + ggplotgiugno1
 dev.off()
 ```
 ![ggplot1](https://github.com/user-attachments/assets/98c1bde2-15d3-4f3f-ad3b-a08d1865a10b)
->*in questo grafico si può vedere come nonostante lo scioglimento della neve che ha aumentato la vegetazione facendo aumetare i valori alti di NDVI, i valori bassi, a seguito della frana, siano comunque aumentati in area*
+>*In questo grafico si può vedere come, nonostante lo scioglimento della neve, abbia portato ad un incremento della vegetazione facendo aumetare i valori alti di NDVI, i valori bassi siano comunque aumentati a seguito della frana*
+
+
+## Conclusioni
