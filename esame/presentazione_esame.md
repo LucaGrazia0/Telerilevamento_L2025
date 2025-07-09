@@ -13,7 +13,7 @@ Il 28/05, alle 15:24, una frana di eccezionale portata, innescata dal crollo del
 
 
 ## Acquisizione delle immagini satellitari 🛰️📡
-### Download immagini 
+### Download immagini ⬇️
 Attraverso [Google Earth Engine](https://earthengine.google.com) ho scaricato le immagini satellitari provenienti dalla missione ESA Sentinel-2.
 
 Per l'area di studio sono state scelte due immagini, nello specifico:
@@ -197,7 +197,7 @@ Export.image.toDrive({
 
 Le immagini restituite sono la mediana composita delle immagini relative al periodo indicato, un filtro ulteriore è stato applicato sciegliendo solo quelle la cui copertura nuvolosa è inferiore al 20%.
 
-### Importazione immagini su R e visualizzazione
+### Importazione immagini su R e visualizzazione 💻
 
 Sono stati utilizzati i seguenti pacchetti per importazione, visualizzazione eanalisi delle immagini:
 + ***terra***, pacchetto per importare immagini e altre funzioni enunciate succesivamente;
@@ -252,9 +252,9 @@ dev.off()
 ![blattensuolonudo](https://github.com/user-attachments/assets/23d8fe19-198b-4b20-93fd-b61debeef27b)
 >*Il colore blu è aumentato nella seconda immagine dato l'aumento delle temperature e il conseguente scioglimento della massa nevosa, si nota chiaramente la frana*
 
-## Analisi immagini 
+## Analisi immagini 🔎
 ### Indici spettrali
-##### DIFFERENT VEGETATION INDEX - DVI
+##### DIFFERENT VEGETATION INDEX - DVI 🌲
 **Calcolo: DVI= NIR - red**
 Questo indice restituisce informazioni dettagliate sullo stato di salute delle piante attraverso la riflettanza della vegetazione nelle bande del rosso e NIR. In caso di stress le cellule a palizzata diminuiscono la loro capacità fotosintetica per ridurre la perdita d'acqua, per cui la riflettanza nel NIR sarà più bassa.
 ```R
@@ -275,7 +275,7 @@ dev.off()
 ![blattenDVI](https://github.com/user-attachments/assets/eeed0cf9-7636-49d7-afbd-700a490742d5)
 >*In queste imamigni si può percepire la distribuzione della biomassa vegetale (visibile in giallo) che si estende nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della massa inerte rappresentata da un'area più scura nel centro*
 
-#### NORMALIZED DIFFERENCE VEGETATION INDEX - NDVI
+#### NORMALIZED DIFFERENCE VEGETATION INDEX - NDVI 🌲
 **Calcolo: NDVI= (NIR - red) / (NIR + red)**
 L'NDVI è un indice spettrale usato per misurare la “vigoria” o lo stato di salute della vegetazione, i valori restituiti vengono normalizzati tra -1 e +1 (calcolando la somma NIR + red).
 In questo caso si può verificare la presenza della vegetazione nelle immagini che sono per verificare l'impatto della frana.
@@ -298,7 +298,7 @@ dev.off()
 ![blattenNDVI](https://github.com/user-attachments/assets/70af042c-ede0-4369-9b24-bfa112a2e277)
 >*Nella prima imamgine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza cospicua di neve, mostrando comunque vaolori vicini a 0.8; nella seconda immagine rimane sempre una vegetazione florida, con presenza di valori anche più alti, ma si distingue più chiaramente la frana*
 
-#### NORMALIZED DIFFERENCE WATER INDEX 
+#### NORMALIZED DIFFERENCE WATER INDEX 🚰
 **NDWI= (Green-NIR)/(Green+NIR)**
 Indice spettrale usato per identificare l'acqua superficiale nelle immagini satellitari (McFeeters, 1996).
 Questa formula fa risaltare l’acqua **(valori positivi)** e scurisce la vegetazione e il suolo (valori negativi).
@@ -350,7 +350,7 @@ dev.off()
 
 >*In giallo si può notare un accumulo di acqua del torrente Lonza a monte della frana dovuto allo sbarramento della massa rocciosa*
 
-### Analisi Multitemporale
+### Analisi Multitemporale 🕙
 Analisi attraverso R per vedere come un'area specifica cambia nel tempo, in questo caso si analizza:
 + **banda del rosso**, molto sensibile alla vegetazione e ai materiali di superficie
 + **NDVI**
@@ -409,7 +409,7 @@ Dal grafico si possono apprezzare due fattori:
 + **NDVI di giugno** mostra un aumento dei valori di NDVI basso (si nota anche la presenza dello speccio d'acqua dai calori NDVI MOLTO BASSI) causati dalla presenza del materiale inerte portato dalla frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
 
 
-### Classificazione delle immaigni
+### Classificazione delle immaigni 📊
 
 Visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, mostro la variazione.
 ```R
@@ -475,4 +475,9 @@ dev.off()
 >*In questo grafico si può vedere come, nonostante lo scioglimento della neve, abbia portato ad un incremento della vegetazione facendo aumetare i valori alti di NDVI, i valori bassi siano comunque aumentati a seguito della frana*
 
 
-## Conclusioni
+## Conclusioni ✍️📖
+testo
++ frana
++ lago
++ altre info
++ 
