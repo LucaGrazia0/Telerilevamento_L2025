@@ -332,8 +332,8 @@ dev.off()
 #ANALISI MULTITEMPORALE
   #Analisi attraverso R per vedere come un'area specifica cambia nel tempo
 
-blatten_diff=blattenpre[[1]]-blattenpost[[1]] #rosso
-blatten_NDVIdiff=NDVIprima-NDVIdopo
+blatten_diff=blattenpre[[1]]-blattenpost[[1]] # variazione banda rosso
+blatten_NDVIdiff=NDVIprima-NDVIdopo    #variazione NDVI
 
 png("blattenmultitemp.png")
 im.multiframe(1,2)
