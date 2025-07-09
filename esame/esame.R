@@ -6,7 +6,7 @@ library(imageRy) #visualizzazione e analisi immagini
 library(viridis) #serve per creare plot di immagini con differenti palette di colori 
 library(ggridges) #permette di creare i plot ridgeline
 library(ggplot2) #permette di creare grafici a barre
-library(patchwork) # package needed to couple graphs
+library(patchwork) #unione dei grafici creati con ggplot2.
 
 
 #Cosa analizzerò:
@@ -344,11 +344,11 @@ dev.off()
 #funzione draw di terra
 plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten_POST (RGB)")
 crop_blatten = draw(x="extent", col="red", lwd=2) #rettangolo, rosso, di spessore 2
-blatten_post_crop = crop(blattenpost, crop_blatten)
-blatten_pre_crop = crop(blattenpre, crop_blatten)
+blatten_post_crop = crop(blattenpost, crop_blatten) #blattenpost croppata
+blatten_pre_crop = crop(blattenpre, crop_blatten) #blattenpre croppata
 
-blatten_ndvi_pre_crop = crop(NDVIprima, crop_blatten)
-blatten_ndvi_post_crop = crop(NDVIdopo, crop_blatten)
+blatten_ndvi_pre_crop = crop(NDVIprima, crop_blatten) #ndvi precedente croppato
+blatten_ndvi_post_crop = crop(NDVIdopo, crop_blatten) #ndvi successivo croppato
 
 png("blattencrop.png")
 im.multiframe(2,2)                                           # creo multiframe e plotto le nuove immagini croppate
@@ -364,10 +364,9 @@ png("blatten_ridgeline1.png")
 im.ridgeline(blatten_ridg, scale=0.5, palette="viridis")    # applico la funzione im.ridgeline del pacchetto imageRy
 dev.off()
 
-
-#i valori che si possono vedere sono molto descrittivi dell'area, abbiamo infatti un picco a maggio dovuto a valori intorno allo 0 che indicano principalmente l'alta quantità di neve 
-#nel mese di giugno si vede un aumento nei valori compresi tra 0 e 0.1 che indicano il nutevole ammasso di rocce e materiali inerti staccatosi dal versante dela montagna, si nota anche un aumento della vegetaizione circostante
-
+#Dal grafico si possono apprezzare due fattori:
+  #NDVI di maggio può rappresentare una situazione di tarda primavera in zone di alta montagna
+  #NDVI di giugno mostra un aumento dei valori di NDVI basso (si nota anche la presenza dello speccio d'acqua) causati dalla presenza della frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
 
 
 #Classificazione immagini
@@ -383,8 +382,8 @@ plot(blatten_maggio_classi - blatten_giugno_classi, main = "Differenza Pixel NDV
 dev.off()
 
 #valori:
-  #1 valori alti NDVI -> vegetazione
-  #2 valori bassi NDVI -> roccia
+  #1 valori elevati di NDVI -> vegetazione
+  #2 valori bassi di NDVI -> roccia
 
   #la differenza è visibile attraverso il colore viola che mostra una differernza sostanziale 
 
