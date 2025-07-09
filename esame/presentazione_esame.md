@@ -409,7 +409,7 @@ dev.off()
 
 Dal grafico si possono apprezzare due fattori:
 + **NDVI di maggio** può rappresentare una situazione di tarda primavera in zone di alta montagna
-+ **NDVI di giugno** mostra un aumento dei valori di NDVI basso (si nota anche la presenza dello speccio d'acqua dai calori NDVI MOLTO BASSI) causati dalla presenza del materiale inerte portato dalla frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
++ **NDVI di giugno** mostra un aumento dei valori di NDVI basso (si nota anche la presenza dello speccio d'acqua dai colori NDVI molto bassi) causati dalla presenza del materiale inerte portato dalla frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
 
 
 ### Classificazione delle immaigni 📊
