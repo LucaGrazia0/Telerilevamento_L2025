@@ -256,6 +256,7 @@ dev.off()
 ### Indici spettrali
 ##### DIFFERENT VEGETATION INDEX - DVI 🌲
 **Calcolo: DVI= NIR - red**
+
 Questo indice restituisce informazioni dettagliate sullo stato di salute delle piante attraverso la riflettanza della vegetazione nelle bande del rosso e NIR. In caso di stress le cellule a palizzata diminuiscono la loro capacità fotosintetica per ridurre la perdita d'acqua, per cui la riflettanza nel NIR sarà più bassa.
 ```R
 DVIpre=im.dvi(blattenpre, 4, 1) #funzione im.dvi di imageRy che prende l'immagine da analizzare e automaticamente il dvi sottraendo dala banda NIR la banda del RED
@@ -277,6 +278,7 @@ dev.off()
 
 #### NORMALIZED DIFFERENCE VEGETATION INDEX - NDVI 🌲
 **Calcolo: NDVI= (NIR - red) / (NIR + red)**
+
 L'NDVI è un indice spettrale usato per misurare la “vigoria” o lo stato di salute della vegetazione, i valori restituiti vengono normalizzati tra -1 e +1 (calcolando la somma NIR + red).
 In questo caso si può verificare la presenza della vegetazione nelle immagini che sono per verificare l'impatto della frana.
 
@@ -300,6 +302,7 @@ dev.off()
 
 #### NORMALIZED DIFFERENCE WATER INDEX 🚰
 **NDWI= (Green-NIR)/(Green+NIR)**
+
 Indice spettrale usato per identificare l'acqua superficiale nelle immagini satellitari (McFeeters, 1996).
 Questa formula fa risaltare l’acqua **(valori positivi)** e scurisce la vegetazione e il suolo (valori negativi).
 
