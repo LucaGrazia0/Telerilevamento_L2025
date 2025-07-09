@@ -476,8 +476,10 @@ dev.off()
 
 
 ## Conclusioni ✍️📖
-testo
+Valori DVI e NDVI, aggiungo alla fine NDWI
+
 + frana
-+ lago
++ lago e problema in inverno con piogge forti 
 + altre info
-+ 
+
+proposta monitoraggio a lungo termine per impatto alla vegetazione, lago formato
