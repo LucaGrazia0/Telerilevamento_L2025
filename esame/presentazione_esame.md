@@ -479,10 +479,18 @@ dev.off()
 
 
 ## Conclusioni ✍️📖
-Valori DVI e NDVI, aggiungo alla fine NDWI
+L'analisi multitemporale attuata sulle immagini satellitari relative all'area della valle del Lötschental interessata dalla frana mostra una variazione significativa nella copertura vegetale tra il mese di maggio e il mese di giugno, questo cambiamento è chiaramente distinguibile attraverso l'applicazione di indicatori spettrali come DVI e NDVI.
 
-+ frana
-+ lago e problema in inverno con piogge forti 
-+ altre info
+L'area di studio a cui è stato applicato l'ingrandimento mostra una **diminuzione significativa** dei valori di NDVI, sintomo di un azzeramento dell'attività fotosintetica conseguente alla distuzione della vegetazione nelle zone colpite dalla frana. Questa tesi è sostenuta anche dalle immagini classificate che mostrano una diminuzione del 5% dell'NDVI elevato (da 66% a 61%) in sintonia con il ridgeline che mostra, in Giugno, un picco accentuato a valori prossimi allo 0.
 
-proposta monitoraggio a lungo termine per impatto alla vegetazione, lago formato
+La formazione del lago di sbarramento, evidenziato tramite NDWI, a seuito della frana ha destato non poche preoccupazioni dato l'elevato innalzamento delle acque subito dopo l'evento; si può apprezzare, però, lo sviluppo di un ramo fluviale che attraversa la massa di sedimenti che ha portato, secondo fonti ufficiali, all'abbassamento di un metro del lago.
+![NDWIcrop](https://github.com/user-attachments/assets/e4bb239b-235b-4227-9a2c-a825693d182d)
+>*imamgine croppata della frana per valutare tramite NDWI lo stato del lago e il deflusso di acqua*
+
+L'evento, grazie al telerilevamento, potrà essere costantemente monitorato in modo da fornire dati più specifici e prevenire ulteriori emergenze; nello specifico:
++ monitoraggio continuo della frana nei mesi successivi per valutare i movimenti successivi della massa; 
++ monitorare i cambiamenti del lago per far fronte a possibili straripamenti e ulteriori danni nella valle   
++ monitoraggio a lungo termine per valutare l'impatto alla vegetazione e attuare piani per la rigenerazione naturale.
+
+![663850674_highres](https://github.com/user-attachments/assets/3363e7c1-c6cf-4bb9-b90d-fe098a30c035)
+
