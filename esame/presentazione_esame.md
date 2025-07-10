@@ -484,6 +484,7 @@ L'analisi multitemporale attuata sulle immagini satellitari relative all'area de
 L'area di studio a cui è stato applicato l'ingrandimento mostra una **diminuzione significativa** dei valori di NDVI, sintomo di un azzeramento dell'attività fotosintetica conseguente alla distuzione della vegetazione nelle zone colpite dalla frana. Questa tesi è sostenuta anche dalle immagini classificate che mostrano una diminuzione del 5% dell'NDVI elevato (da 66% a 61%) in sintonia con il ridgeline che mostra, in Giugno, un picco accentuato a valori prossimi allo 0.
 
 La formazione del lago di sbarramento, evidenziato tramite NDWI, a seuito della frana ha destato non poche preoccupazioni dato l'elevato innalzamento delle acque subito dopo l'evento; si può apprezzare, però, lo sviluppo di un ramo fluviale che attraversa la massa di sedimenti che ha portato, secondo fonti ufficiali, all'abbassamento di un metro del lago.
+
 ![NDWIcrop](https://github.com/user-attachments/assets/e4bb239b-235b-4227-9a2c-a825693d182d)
 >*imamgine croppata della frana per valutare tramite NDWI lo stato del lago e il deflusso di acqua*
 
