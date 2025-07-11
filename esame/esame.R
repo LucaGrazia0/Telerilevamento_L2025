@@ -6,7 +6,7 @@ library(imageRy) #visualizzazione e analisi immagini
 library(viridis) #serve per creare plot di immagini con differenti palette di colori 
 library(ggridges) #permette di creare i plot ridgeline
 library(ggplot2) #permette di creare grafici a barre
-library(patchwork) #unione dei grafici creati con ggplot2.
+library(patchwork) # serve per unire dei grafici creati con ggplot2.
 
 
 #Cosa analizzerò:
