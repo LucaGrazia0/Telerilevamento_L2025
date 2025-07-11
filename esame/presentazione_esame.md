@@ -224,7 +224,11 @@ plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima"
 plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo")
 dev.off()
 ```
-![blattenrgb](https://github.com/user-attachments/assets/5669853d-edd2-436e-9838-2235a0a0161d)
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/5669853d-edd2-436e-9838-2235a0a0161d" />
+</p>
+
+>[!NOTE]
 >*Le due immagini che mostrano le differenze tra prima e dopo la frana*
 
 Isolo e confronto le due immagini mettendo in risalto solo le corrispettive bande Near Infra-Red 
