@@ -5,7 +5,7 @@
 ## Le conseguenze della frana che ha interessato l'abitato di Blatten nella valle del Lötschental🏔️
 Il 28/05, alle 15:24, una frana di eccezionale portata, innescata dal crollo del ghiacciaio Birch, ha sepolto circa il 90% del territorio comunale di Blatten, travolgendo ampie porzioni del villaggio con una colata composta da ghiaccio, fango e detriti rocciosi. Il materiale franato ha ostruito il corso del fiume Lonza, che attraversa la valle, formando un lago temporaneo a monte dell’area interessata.
 
-**In questo elaborato è stata analizzata, tramite telerilevamento satellitare, la variazione della copertura del suolo a seguito di una frana e la conseguente formazione del lago a monte** attraverso il confronto di due immagini che si riferiscono al mese precedente e successivo alla frana.
+**In questo elaborato è stata analizzata, tramite telerilevamento satellitare, la variazione della copertura del suolo a seguito di una frana e la conseguente formazione del lago** attraverso il confronto di due immagini che si riferiscono al mese precedente e successivo alla frana.
 
 
 ![image](https://github.com/user-attachments/assets/34b45dbb-6912-4c2b-924f-9135dd4f9c52)
