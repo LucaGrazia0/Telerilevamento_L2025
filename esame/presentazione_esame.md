@@ -3,8 +3,7 @@
 >> ### matricola n. 1191463
 
 ## Le conseguenze della frana che ha interessato l'abitato di Blatten nella valle del Lötschental🏔️
-Il 28/05, alle 15:24, una frana di eccezionale portata, innescata dal crollo del ghiacciaio Birch, ha sepolto circa il 90% del territorio comunale di Blatten, travolgendo ampie porzioni del villaggio con una colata composta da ghiaccio, fango e detriti rocciosi. Il materiale franato ha ostruito il corso del fiume Lonza, che attraversa la valle, formando un lago temporaneo a monte dell’area interessata.
-
+Il 28/05, alle 15:24, una frana di eccezionale portata, innescata dal crollo del ghiacciaio Birch, ha sepolto circa il 90% del territorio comunale di Blatten, travolgendo ampie porzioni del villaggio con una colata composta da ghiaccio, fango e detriti rocciosi. Il materiale franato ha ostruito il corso del fiume Lonza, che attraversa la valle, formando un lago temporaneo a monte dell’area interessata.  
 **In questo elaborato è stata analizzata, tramite telerilevamento satellitare, la variazione della copertura del suolo a seguito di una frana e la conseguente formazione del lago** attraverso il confronto di due immagini che si riferiscono al mese precedente e successivo alla frana.
 
 
@@ -208,8 +207,7 @@ Sono stati utilizzati i seguenti pacchetti per importazione, visualizzazione ean
 + ***patchwork***, unione dei grafici creati con ggplot2.
 
 
-Dopo aver importato le immagini su google drive in formato .tif, eseguo il download salvandole nella cartella apposita sul mio dispositivo.
-
+Dopo aver importato le immagini su google drive in formato .tif, eseguo il download salvandole nella cartella apposita sul mio dispositivo.  
 Per prima cosa, quindi, imposto la directory di lavoro
 ```R
 setwd("/Users/lucagrazia/Downloads") #imposto la working directory
@@ -241,7 +239,8 @@ dev.off()
 ![blattenbandaNIR](https://github.com/user-attachments/assets/431a9903-7ebe-4a69-8f13-bc3b2af8d05c)
 >*Si può intravedere, anche se con difficoltà, una massa nel centro dell'immagine che corrisponde alla frana*
 
-Visualizzo quindi il suolo nudo ponendo la banda **NIR**, al posto della banda blu mostrando così la vegetazione di quest'ultimo colore mentre tutto quello che non è vegetazione viene mostrato nella scala del giallo, solitamente è usato per evidenziare il suolo nudo
+Visualizzo quindi il suolo nudo ponendo la banda **NIR**, al posto della banda blu mostrando così la vegetazione di quest'ultimo colore mentre tutto quello che non è vegetazione viene mostrato nella scala del giallo, solitamente è usato per evidenziare il suolo nudo.
+
 ```R
 png("blattensuolonudo.png")
 im.multiframe(1,2)
@@ -350,7 +349,6 @@ plot(NDWIdopo, stretch = "lin", main = "NDWI_dopo", col=inferno(100))
 dev.off()
 ```
 ![blattenNDWI](https://github.com/user-attachments/assets/3e21f934-881a-492a-8038-b3d0278bac5c)
-
 >*In giallo si può notare un accumulo di acqua del torrente Lonza a monte della frana dovuto allo sbarramento della massa rocciosa*
 
 ### Analisi Multitemporale 🕙
@@ -415,6 +413,7 @@ Dal grafico si possono apprezzare due fattori:
 ### Classificazione delle immaigni 📊
 
 Visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, ne mostro la variazione in superficie.
+
 ```R
 blatten_maggio_classi = im.classify(blatten_ndvi_pre_crop, num_clusters=2)   # divido i pixel di ogni immagine in due cluster per capire come sono stati classificati  
 blatten_giugno_classi = im.classify(blatten_ndvi_post_crop, num_clusters=2)
@@ -433,10 +432,9 @@ Valori delle classi:
 + 1 valori **elevati** di NDVI -> vegetazione
 + 2 valori **bassi** di NDVI -> roccia, neve, sassi,...
 
-Il colore viola mostra la differenza sostanziale tra le due immagini evidenziando la perdita di vegetazione nell'area colpita.
-
+Il colore viola mostra la differenza sostanziale tra le due immagini evidenziando la perdita di vegetazione nell'area colpita.  
 Trovo quindi le percentuali di copertura di ciascuna classe di pixel relativi alle due immagini, per farlo calcolo, attraverso la funzione freq() di **R**, il numero di celle (pixel) di ciascun valore.
-Successivamente trovo il numero di pixel totali con la funzione ncell() di **R**.
+Successivamente trovo il numero di pixel totali con la funzione ncell() di **R**.  
 Applico una divisione e trovo le percentuali, produco poi un dataframe che comprende i dati raccolti.
 ```R
 percentuale_maggio = freq(blatten_maggio_classi) * 100 / ncell(blatten_maggio_classi)
@@ -479,10 +477,8 @@ dev.off()
 
 
 ## Conclusioni ✍️📖
-L'analisi multitemporale attuata sulle immagini satellitari relative all'area della valle del Lötschental interessata dalla frana mostra una variazione significativa nella copertura vegetale tra il mese di maggio e il mese di giugno, questo cambiamento è chiaramente distinguibile attraverso l'applicazione di indicatori spettrali come DVI e NDVI.
-
-L'area di studio a cui è stato applicato l'ingrandimento mostra una **diminuzione significativa** dei valori di NDVI, sintomo di un azzeramento dell'attività fotosintetica conseguente alla distuzione della vegetazione nelle zone colpite dalla frana. Questa tesi è sostenuta anche dalle immagini classificate che mostrano una diminuzione del 5% dell'NDVI elevato (da 66% a 61%) in sintonia con il ridgeline che a sua volta, mostra, in Giugno, un picco accentuato di valori prossimi allo 0.
-
+L'analisi multitemporale attuata sulle immagini satellitari relative all'area della valle del Lötschental interessata dalla frana mostra una variazione significativa nella copertura vegetale tra il mese di maggio e il mese di giugno, questo cambiamento è chiaramente distinguibile attraverso l'applicazione di indicatori spettrali come DVI e NDVI.  
+L'area di studio a cui è stato applicato l'ingrandimento mostra una **diminuzione significativa** dei valori di NDVI, sintomo di un azzeramento dell'attività fotosintetica conseguente alla distuzione della vegetazione nelle zone colpite dalla frana. Questa tesi è sostenuta anche dalle immagini classificate che mostrano una diminuzione del 5% dell'NDVI elevato (da 66% a 61%) in sintonia con il ridgeline che a sua volta, mostra, in Giugno, un picco accentuato di valori prossimi allo 0.  
 La formazione del lago di sbarramento, evidenziato tramite NDWI, a seuito della frana ha destato non poche preoccupazioni datoil rapido innalzamento delle acque subito dopo l'evento, come confermato dalle stesse autorità giunte sul luogo; si può apprezzare, però, lo sviluppo di un ramo fluviale che attraversa la massa di sedimenti e che ha portato, secondo fonti ufficiali, all'abbassamento dell'altezza di almeno un metro del lago.
 
 ![NDWIcrop](https://github.com/user-attachments/assets/e4bb239b-235b-4227-9a2c-a825693d182d)
