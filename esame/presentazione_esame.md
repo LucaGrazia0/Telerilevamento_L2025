@@ -208,9 +208,9 @@ Sono stati utilizzati i seguenti pacchetti per importazione, visualizzazione ean
 + ***patchwork***, unione dei grafici creati con ggplot2.
 
 
-Dopo aver scaricato le immagini su google drive in formato .tif,  eseguo il download salvandole nella cartella apposita sul mio dispositivo.
+Dopo aver importato le immagini su google drive in formato .tif, eseguo il download salvandole nella cartella apposita sul mio dispositivo.
 
-Per prima cosa imposto la directory di lavoro
+Per prima cosa, quindi, imposto la directory di lavoro
 ```R
 setwd("/Users/lucagrazia/Downloads") #imposto la working directory
 ```
