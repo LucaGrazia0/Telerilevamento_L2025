@@ -255,7 +255,7 @@ dev.off()
 ## Analisi immagini 🔎
 ### Indici spettrali
 ##### DIFFERENT VEGETATION INDEX - DVI 🌲
-**Calcolo: DVI= NIR - red**
+$` DVI = NIR - Red `$
 
 Questo indice restituisce informazioni dettagliate sullo stato di salute delle piante attraverso la riflettanza della vegetazione nelle bande del rosso e NIR. In caso di stress le cellule a palizzata diminuiscono la loro capacità fotosintetica per ridurre la perdita d'acqua, per cui la riflettanza nel NIR sarà più bassa.
 ```R
@@ -277,7 +277,7 @@ dev.off()
 >*In queste immagini si può percepire la distribuzione della biomassa vegetale (visibile in giallo) che si estende nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della massa inerte rappresentata da un'area più scura nel centro*
 
 #### NORMALIZED DIFFERENCE VEGETATION INDEX - NDVI 🌲
-**Calcolo: NDVI= (NIR - red) / (NIR + red)**
+$` NDVI = \frac{(NIR - Red)}{(NIR + Red)} `$
 
 L'NDVI è un indice spettrale usato per misurare la “vigoria” o lo stato di salute della vegetazione, i valori restituiti vengono normalizzati tra -1 e +1 (calcolando la somma NIR + red).
 In questo caso si può verificare la presenza della vegetazione nelle immagini che sono per verificare l'impatto della frana.
@@ -301,7 +301,7 @@ dev.off()
 >*Nella prima imamgine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza cospicua di neve, mostrando vaolori vicini a 0.8; nella seconda immagine rimane sempre una vegetazione florida, con presenza di valori anche più accentuati, ma si distingue più chiaramente la frana*
 
 #### NORMALIZED DIFFERENCE WATER INDEX 🚰
-**NDWI= (Green-NIR)/(Green+NIR)**
+$` NDWI = \frac{(Green-NIR)}{(Green+NIR)} `$
 
 Indice spettrale usato per identificare l'acqua superficiale nelle immagini satellitari (McFeeters, 1996).
 Questa formula fa risaltare l’acqua **(valori positivi)** mentre scurisce la vegetazione e il suolo (valori negativi).
