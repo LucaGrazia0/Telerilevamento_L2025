@@ -315,7 +315,7 @@ dev.off()
   <img width="480" height="480" src="https://github.com/user-attachments/assets/70af042c-ede0-4369-9b24-bfa112a2e277" />
 </p>
 
->*Nella prima immagine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza cospicua di neve, mostrando vaolori vicini a 0.8; nella seconda immagine rimane sempre una vegetazione florida, con presenza di valori anche più accentuati, ma si distingue più chiaramente la frana*
+>*Nella prima immagine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza cospicua di neve, mostrando valori vicini a 0.8; nella seconda immagine rimane sempre una vegetazione florida, con presenza di valori anche più accentuati, ma si distingue più chiaramente la frana*
 
 #### NORMALIZED DIFFERENCE WATER INDEX 🚰
 $` NDWI = \frac{(Green-NIR)}{(Green+NIR)} `$
@@ -393,7 +393,7 @@ dev.off()
 
 >*È visibile una zona di colore diverso nel centro dell'immagine, nello specifico nella seconda immagine, che corrisponde alla frana*
 
-Applico la funzione **draw del pacchetto terra** per selezionare un'area specifica dell'immagine, questo è importante perchè, in questo caso, lo scioglimento rapido della neve tra maggio e giugno ha portato ad una vigoria maggiore delle piante, per cui ho scelto un'area più piccola per analizzare più efficaciemente le immagini e comprendere finemente i cambiamenti.
+Applico la funzione **draw del pacchetto terra** per selezionare un'area specifica dell'immagine, questo è importante perché, in questo caso, lo scioglimento rapido della neve tra maggio e giugno ha portato ad una vigoria maggiore delle piante, per cui ho scelto un'area più piccola per analizzare più efficacemente le immagini e comprendere finemente i cambiamenti.
 
 ```R
 #funzione draw di terra
@@ -439,7 +439,7 @@ Dal grafico si possono apprezzare due fattori:
 + **NDVI di giugno** mostra un aumento dei valori di NDVI basso (si nota anche la presenza di valori inferiori a -0.5) causati dalla presenza del materiale inerte portato dalla frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
 
 
-### Classificazione delle immaigni 📊
+### Classificazione delle immagini 📊
 
 Visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, ne mostro la variazione in superficie.
 
