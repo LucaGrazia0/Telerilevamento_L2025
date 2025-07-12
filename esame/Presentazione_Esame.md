@@ -16,8 +16,8 @@ Il 28/05, alle 15:24, una frana di eccezionale portata, innescata dal crollo del
 Attraverso [Google Earth Engine](https://earthengine.google.com) ho scaricato le immagini satellitari provenienti dalla missione ESA Sentinel-2.
 
 Per l'area di studio sono state scelte due immagini, nello specifico:
-+ per la prima, il periodo preso in consideravione va dal **01/05** al **25/05**, il mese precedente alla frana; 
-+ per la seconda, il periodo preso in consideravione va dal **30/05** al **30/06**, il mese successivo alla frana.
++ per la prima, il periodo preso in considerazione va dal **01/05** al **25/05**, il mese precedente alla frana; 
++ per la seconda, il periodo preso in considerazione va dal **30/05** al **30/06**, il mese successivo alla frana.
 
 Ecco di seguito il codice in JavaScript utilizzato su [Google Earth Engine](https://earthengine.google.com):
 
@@ -194,15 +194,15 @@ Export.image.toDrive({
 });
 ```
 
-Le immagini restituite sono la mediana composita delle immagini relative al periodo indicato, un filtro ulteriore è stato applicato sciegliendo solo quelle la cui copertura nuvolosa è inferiore al 20%.
+Le immagini restituite sono la mediana composita delle immagini relative al periodo indicato, un filtro ulteriore è stato applicato scegliendo solo quelle la cui copertura nuvolosa è inferiore al 20%.
 
 ### Importazione immagini su R e visualizzazione 💻
 
-Sono stati utilizzati i seguenti pacchetti per importazione, visualizzazione eanalisi delle immagini:
-+ ***terra***, pacchetto per importare immagini e altre funzioni enunciate succesivamente;
+Sono stati utilizzati i seguenti pacchetti per importazione, visualizzazione e analisi delle immagini:
++ ***terra***, pacchetto per importare immagini e altre funzioni enunciate successivamente;
 + ***imageRy***, per la visualizzazione, analisi delle immagini e altre funzioni;
 + ***viridis***, serve per palette di colori;
-+ ***ggridges***, per craere plot ridgeline;
++ ***ggridges***, per creare plot ridgeline;
 + ***ggplot2***, creazione di grafici a barre; 
 + ***patchwork***, unione dei grafici creati con ggplot2.
 
@@ -278,7 +278,7 @@ plot(DVIpost, col=inferno(100))  #uso inferno di viridis
 dev.off()
 
 png("blattenDVI.png")
-im.multiframe(1,2) #Creo un pannello multiframe per confrontare le immagini su cui è stato calcolalto il DVI
+im.multiframe(1,2) #Creo un pannello multiframe per confrontare le immagini su cui è stato calcolato il DVI
 plot(DVIpre, stretch = "lin", main = "pre_frana", col=inferno(100))
 plot(DVIpost, stretch = "lin", main = "post_frana", col=inferno(100))
 dev.off()
@@ -288,7 +288,7 @@ dev.off()
   <img width="480" height="480" src="https://github.com/user-attachments/assets/eeed0cf9-7636-49d7-afbd-700a490742d5" />
 </p>
 
->*In queste immagini si può percepire la distribuzione della biomassa vegetale (visibile in giallo) che si estende nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della massa inerte rappresentata da un'area più scura nel centro*
+>*In queste immagini si può percepire la distribuzione della biomassa vegetale (rappresentata in giallo) che si estende nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della massa inerte rappresentata da un'area più scura nel centro*
 
 #### NORMALIZED DIFFERENCE VEGETATION INDEX - NDVI 🌲
 $` NDVI = \frac{(NIR - Red)}{(NIR + Red)} `$
@@ -315,7 +315,7 @@ dev.off()
   <img width="480" height="480" src="https://github.com/user-attachments/assets/70af042c-ede0-4369-9b24-bfa112a2e277" />
 </p>
 
->*Nella prima imamgine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza cospicua di neve, mostrando vaolori vicini a 0.8; nella seconda immagine rimane sempre una vegetazione florida, con presenza di valori anche più accentuati, ma si distingue più chiaramente la frana*
+>*Nella prima immagine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza cospicua di neve, mostrando vaolori vicini a 0.8; nella seconda immagine rimane sempre una vegetazione florida, con presenza di valori anche più accentuati, ma si distingue più chiaramente la frana*
 
 #### NORMALIZED DIFFERENCE WATER INDEX 🚰
 $` NDWI = \frac{(Green-NIR)}{(Green+NIR)} `$
@@ -393,7 +393,7 @@ dev.off()
 
 >*È visibile una zona di colore diverso nel centro dell'immagine, nello specifico nella seconda immagine, che corrisponde alla frana*
 
-Applico la funzione **draw del pacchetto terra** per selezionare un'area specifica dell'immagine, questo è importante perchè, in questo caso, lo scioglimento rapido della neve tra meggio e giugno ha portato ad una vigoria maggiore delle piante, per cui ho scelto un'area più piccola per analizzare più efficaciemente le immagini e comprendere finemente i cambiamenti.
+Applico la funzione **draw del pacchetto terra** per selezionare un'area specifica dell'immagine, questo è importante perchè, in questo caso, lo scioglimento rapido della neve tra maggio e giugno ha portato ad una vigoria maggiore delle piante, per cui ho scelto un'area più piccola per analizzare più efficaciemente le immagini e comprendere finemente i cambiamenti.
 
 ```R
 #funzione draw di terra
@@ -448,7 +448,7 @@ blatten_maggio_classi = im.classify(blatten_ndvi_pre_crop, num_clusters=2)   # d
 blatten_giugno_classi = im.classify(blatten_ndvi_post_crop, num_clusters=2)
 
 png("visualizzazione_classi_ndvi1.png")
-im.multiframe(2,2) #plotto le due immagini in cui risaltano i due cluster di pixel e la corrispettiva diffrerenza
+im.multiframe(2,2) #plotto le due immagini in cui risaltano i due cluster di pixel e la corrispettiva differerenza
 plot(blatten_maggio_classi, main = "Pixel prima della frana")
 plot(blatten_giugno_classi, main = "Pixel dopo la frana")
 plot(blatten_maggio_classi - blatten_giugno_classi, main = "Differenza Pixel NDVI blatten\n(maggio-giugno)")
@@ -508,13 +508,13 @@ dev.off()
   <img width="480" height="480" src="https://github.com/user-attachments/assets/98c1bde2-15d3-4f3f-ad3b-a08d1865a10b" />
 </p>
 
->*In questo grafico si può vedere come, nonostante lo scioglimento della neve abbia portato ad un incremento della vegetazione facendo aumetare i valori alti di NDVI, i valori bassi siano comunque aumentati a seguito della frana*
+>*In questo grafico si può vedere come, nonostante lo scioglimento della neve abbia portato ad un incremento della vegetazione facendo aumentare i valori alti di NDVI, i valori bassi siano comunque aumentati a seguito della frana*
 
 
 ## Conclusioni ✍️📖
 L'analisi multitemporale attuata sulle immagini satellitari relative all'area della valle del Lötschental interessata dalla frana mostra una variazione significativa nella copertura vegetale tra il mese di maggio e il mese di giugno, questo cambiamento è chiaramente distinguibile attraverso l'applicazione di indicatori spettrali come DVI e NDVI.  
 L'area di studio a cui è stato applicato l'ingrandimento mostra una **diminuzione significativa** dei valori di NDVI, sintomo di un azzeramento dell'attività fotosintetica conseguente alla distuzione della vegetazione nelle zone colpite dalla frana. Questa tesi è sostenuta anche dalle immagini classificate che mostrano una diminuzione del 5% dell'NDVI elevato (da 66% a 61%) in sintonia con il ridgeline che a sua volta, mostra, in Giugno, un picco accentuato di valori prossimi allo 0.  
-La formazione del lago di sbarramento, evidenziato tramite NDWI, a seuito della frana ha destato non poche preoccupazioni dato il rapido innalzamento delle acque subito dopo l'evento, come confermato dalle stesse autorità giunte sul luogo; si può apprezzare, però, lo sviluppo di un ramo fluviale che attraversa la massa di sedimenti e che ha portato, secondo fonti ufficiali, all'abbassamento dell'altezza di almeno un metro del lago.
+La formazione del lago di sbarramento, evidenziato tramite NDWI, a seugito della frana ha destato non poche preoccupazioni dato il rapido innalzamento delle acque subito dopo l'evento, come confermato dalle stesse autorità giunte sul luogo; si può apprezzare, però, lo sviluppo di un ramo fluviale che attraversa la massa di sedimenti e che ha portato, secondo fonti ufficiali, all'abbassamento dell'altezza di almeno un metro del lago.
 <p align="center">
   <img width="480" height="480" src="https://github.com/user-attachments/assets/e4bb239b-235b-4227-9a2c-a825693d182d" />
 </p>
