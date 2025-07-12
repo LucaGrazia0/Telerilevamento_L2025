@@ -214,6 +214,7 @@ setwd("/Users/lucagrazia/Downloads") #imposto la working directory
 ```
 
 Importazione delle immagini su R attraverso la funzione rast() e visualizzazione con i colori reali im.plotRGB() impostando un pannello multiframe per mostrarle entrambe.
+
 ```R
 blattenpre=rast("blattenpre1.tif") #importo il raster attraverso la funzione rast() di terra e lo nomino
 blattenpost=rast("blattenpostNIR.tif") #importo il raster attraverso la funzione rast() di terra e lo nomino
@@ -228,7 +229,6 @@ dev.off()
   <img width="480" height="480" src="https://github.com/user-attachments/assets/5669853d-edd2-436e-9838-2235a0a0161d" />
 </p>
 
->[!NOTE]
 >*Le due immagini che mostrano le differenze tra prima e dopo la frana*
 
 Isolo e confronto le due immagini mettendo in risalto solo le corrispettive bande Near Infra-Red 
@@ -240,7 +240,10 @@ plot(blattenpre[[4]], stretch="lin", main = "BlattenpreNIR", col=inferno(100)) #
 plot(blattenpost[[4]], stretch="lin", main = "BlattenpostNIR", col=inferno(100))
 dev.off()
 ```
-![blattenbandaNIR](https://github.com/user-attachments/assets/431a9903-7ebe-4a69-8f13-bc3b2af8d05c)
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/431a9903-7ebe-4a69-8f13-bc3b2af8d05c" />
+</p>
+
 >*Si può intravedere, anche se con difficoltà, una massa nel centro dell'immagine che corrisponde alla frana*
 
 Visualizzo quindi il suolo nudo ponendo la banda **NIR**, al posto della banda blu mostrando così la vegetazione di quest'ultimo colore mentre tutto quello che non è vegetazione viene mostrato nella scala del giallo, solitamente è usato per evidenziare il suolo nudo.
@@ -252,8 +255,12 @@ plotRGB(blattenpre, r = 1, g = 2, b = 4, stretch="lin", main = "Blatten Prima") 
 plotRGB(blattenpost, r = 1, g = 2, b = 4, stretch="lin", main = "Blatten Dopo")
 dev.off()
 ```
-![blattensuolonudo](https://github.com/user-attachments/assets/23d8fe19-198b-4b20-93fd-b61debeef27b)
->*Il colore blu è aumentato nella seconda immagine dato l'aumento delle temperature e il conseguente scioglimento della massa nevosa, si nota chiaramente la frana*
+
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/23d8fe19-198b-4b20-93fd-b61debeef27b" />
+</p>
+
+>*Il colore blu è più accentuato nella seconda immagine dato l'aumento delle temperature e il conseguente scioglimento della massa nevosa, si nota chiaramente la frana*
 
 ## Analisi immagini 🔎
 ### Indici spettrali
@@ -276,7 +283,11 @@ plot(DVIpre, stretch = "lin", main = "pre_frana", col=inferno(100))
 plot(DVIpost, stretch = "lin", main = "post_frana", col=inferno(100))
 dev.off()
 ```
-![blattenDVI](https://github.com/user-attachments/assets/eeed0cf9-7636-49d7-afbd-700a490742d5)
+
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/eeed0cf9-7636-49d7-afbd-700a490742d5" />
+</p>
+
 >*In queste immagini si può percepire la distribuzione della biomassa vegetale (visibile in giallo) che si estende nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della massa inerte rappresentata da un'area più scura nel centro*
 
 #### NORMALIZED DIFFERENCE VEGETATION INDEX - NDVI 🌲
@@ -300,7 +311,10 @@ plot(NDVIprima, stretch = "lin", main = "NDVIprima_frana", col=inferno(100))
 plot(NDVIdopo, stretch = "lin", main = "NDVIdopo_frana", col=inferno(100))
 dev.off()
 ```
-![blattenNDVI](https://github.com/user-attachments/assets/70af042c-ede0-4369-9b24-bfa112a2e277)
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/70af042c-ede0-4369-9b24-bfa112a2e277" />
+</p>
+
 >*Nella prima imamgine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza cospicua di neve, mostrando vaolori vicini a 0.8; nella seconda immagine rimane sempre una vegetazione florida, con presenza di valori anche più accentuati, ma si distingue più chiaramente la frana*
 
 #### NORMALIZED DIFFERENCE WATER INDEX 🚰
@@ -352,7 +366,10 @@ plot(NDWIprima, stretch = "lin", main = "NDWI_prima", col=inferno(100))
 plot(NDWIdopo, stretch = "lin", main = "NDWI_dopo", col=inferno(100))
 dev.off()
 ```
-![blattenNDWI](https://github.com/user-attachments/assets/3e21f934-881a-492a-8038-b3d0278bac5c)
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/3e21f934-881a-492a-8038-b3d0278bac5c" />
+</p>
+
 >*In giallo si può notare un accumulo di acqua del torrente Lonza a monte della frana dovuto allo sbarramento della massa rocciosa*
 
 ### Analisi Multitemporale 🕙
@@ -370,7 +387,10 @@ plot(blatten_diff, main = "BLATTEN PRIMA E DOPO:\ndifferenza banda del rosso", c
 plot(blatten_NDVIdiff, main = "BLATTEN PRIMA E DOPO:\ndifferenza NDVI", col=rocket(100)) #differenza NDVI tra le due immagini, visibile la frana
 dev.off()
 ```
-![blattenmultitemp](https://github.com/user-attachments/assets/16e29cd7-5d7a-4e06-a456-effed93f37f3)
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/16e29cd7-5d7a-4e06-a456-effed93f37f3" />
+</p>
+
 >*È visibile una zona di colore diverso nel centro dell'immagine, nello specifico nella seconda immagine, che corrisponde alla frana*
 
 Applico la funzione **draw del pacchetto terra** per selezionare un'area specifica dell'immagine, questo è importante perchè, in questo caso, lo scioglimento rapido della neve tra meggio e giugno ha portato ad una vigoria maggiore delle piante, per cui ho scelto un'area più piccola per analizzare più efficaciemente le immagini e comprendere finemente i cambiamenti.
@@ -393,7 +413,10 @@ plot(blatten_ndvi_pre_crop, main = "NDVI maggio")
 plot(blatten_ndvi_post_crop, main = "NDVI giugno")
 dev.off()
 ```
-![blattencrop](https://github.com/user-attachments/assets/271554fb-c7dd-4369-be99-73942de5aed7)
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/271554fb-c7dd-4369-be99-73942de5aed7" />
+</p>
+
 >*Le aree croppate e le corrispettive con indice NDVI*
 
 Proseguo facendo un'analisi ridgeline sulle immagini croppate che permette di creare due **curve di distribuzione** utili per valutare possibili variazioni nel tempo nella frequenza dell'NDVI
@@ -405,8 +428,10 @@ png("blatten_ridgeline1.png")
 im.ridgeline(blatten_ridg, scale=0.5, palette="viridis")    # applico la funzione im.ridgeline del pacchetto imageRy
 dev.off()
 ```
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/9db5216c-33bd-4005-a502-7fcffad90b6a" />
+</p>
 
-![blatten_ridgeline1](https://github.com/user-attachments/assets/9db5216c-33bd-4005-a502-7fcffad90b6a)
 >*Distribuzioni di NDVI nelle due immagini croppate*
 
 Dal grafico si possono apprezzare due fattori:
@@ -429,7 +454,10 @@ plot(blatten_giugno_classi, main = "Pixel dopo la frana")
 plot(blatten_maggio_classi - blatten_giugno_classi, main = "Differenza Pixel NDVI blatten\n(maggio-giugno)")
 dev.off()
 ```
-![visualizzazione_classi_ndvi1](https://github.com/user-attachments/assets/857f3ab1-554c-47ab-ba6f-1bd20dcff57f)
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/857f3ab1-554c-47ab-ba6f-1bd20dcff57f" />
+</p>
+
 >*Immagine che mostra le classi in cui sono stati divisi i pixel e la corrispettiva differenza dove, in viola, viene evidenziata la frana rispetto al territorio sottostante*
 
 Valori delle classi:
@@ -476,7 +504,10 @@ ggplotmaggio1 + ggplotgiugno1
 + plot_annotation(title = "Valori NDVI (espressi in superficie) nell'area di Blatten")    # creo un plot con i due grafici, plot annotation mi serve per aggiungere un titolo
 dev.off()
 ```
-![ggplot1](https://github.com/user-attachments/assets/98c1bde2-15d3-4f3f-ad3b-a08d1865a10b)
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/98c1bde2-15d3-4f3f-ad3b-a08d1865a10b" />
+</p>
+
 >*In questo grafico si può vedere come, nonostante lo scioglimento della neve abbia portato ad un incremento della vegetazione facendo aumetare i valori alti di NDVI, i valori bassi siano comunque aumentati a seguito della frana*
 
 
@@ -484,14 +515,18 @@ dev.off()
 L'analisi multitemporale attuata sulle immagini satellitari relative all'area della valle del Lötschental interessata dalla frana mostra una variazione significativa nella copertura vegetale tra il mese di maggio e il mese di giugno, questo cambiamento è chiaramente distinguibile attraverso l'applicazione di indicatori spettrali come DVI e NDVI.  
 L'area di studio a cui è stato applicato l'ingrandimento mostra una **diminuzione significativa** dei valori di NDVI, sintomo di un azzeramento dell'attività fotosintetica conseguente alla distuzione della vegetazione nelle zone colpite dalla frana. Questa tesi è sostenuta anche dalle immagini classificate che mostrano una diminuzione del 5% dell'NDVI elevato (da 66% a 61%) in sintonia con il ridgeline che a sua volta, mostra, in Giugno, un picco accentuato di valori prossimi allo 0.  
 La formazione del lago di sbarramento, evidenziato tramite NDWI, a seuito della frana ha destato non poche preoccupazioni datoil rapido innalzamento delle acque subito dopo l'evento, come confermato dalle stesse autorità giunte sul luogo; si può apprezzare, però, lo sviluppo di un ramo fluviale che attraversa la massa di sedimenti e che ha portato, secondo fonti ufficiali, all'abbassamento dell'altezza di almeno un metro del lago.
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/e4bb239b-235b-4227-9a2c-a825693d182d" />
+</p>
 
-![NDWIcrop](https://github.com/user-attachments/assets/e4bb239b-235b-4227-9a2c-a825693d182d)
 >*imamgine croppata della frana per valutare tramite NDWI lo stato del lago e il deflusso di acqua*
 
 L'evento, grazie al telerilevamento, potrà essere costantemente monitorato in futuro, in modo da fornire dati più specifici e prevenire ulteriori emergenze, nello specifico:
 + monitoraggio continuo della frana nei mesi successivi per valutare i movimenti successivi della massa; 
 + monitorare i cambiamenti del lago per prevenire possibili straripamenti e ulteriori danni nella valle;   
 + monitoraggio a lungo termine alla vegetazione per quantificare l'impatto e pianificare una rigenerazione naturale.
+<p align="center">
+  <img width="480" height="480" src="https://github.com/user-attachments/assets/3363e7c1-c6cf-4bb9-b90d-fe098a30c035" />
+</p>
 
-![663850674_highres](https://github.com/user-attachments/assets/3363e7c1-c6cf-4bb9-b90d-fe098a30c035)
 
