@@ -213,7 +213,7 @@ Per prima cosa, quindi, imposto la directory di lavoro
 setwd("/Users/lucagrazia/Downloads") #imposto la working directory
 ```
 
-Importazione delle immagini su R attraverso la funzione rast() e visualizzazione con i colori reali im.plotRGB() impostando un pannello multiframe per mostrarle entrambe.
+Importazione delle immagini su R attraverso la funzione rast() e visualizzazione con i colori reali, funizone plotRGB(), impostando un pannello multiframe per mostrarle entrambe.
 
 ```R
 blattenpre=rast("blattenpre1.tif") #importo il raster attraverso la funzione rast() di terra e lo nomino
@@ -512,7 +512,7 @@ dev.off()
 
 
 ## Conclusioni ✍️📖
-L'analisi multitemporale attuata sulle immagini satellitari relative all'area della valle del Lötschental interessata dalla frana mostra una variazione significativa nella copertura vegetale tra il mese di maggio e il mese di giugno, questo cambiamento è chiaramente distinguibile attraverso l'applicazione di indicatori spettrali come DVI e NDVI.  
+L'analisi multitemporale attuata sulle immagini satellitari relative all'area della valle del Lötschental interessata dalla frana mostra una variazione significativa nella copertura vegetale tra il mese di maggio e il mese di giugno, questo cambiamento è chiaramente distinguibile attraverso l'applicazione di indici spettrali come DVI e NDVI.  
 L'area di studio a cui è stato applicato l'ingrandimento mostra una **diminuzione significativa** dei valori di NDVI, sintomo di un azzeramento dell'attività fotosintetica conseguente alla distuzione della vegetazione nelle zone colpite dalla frana. Questa tesi è sostenuta anche dalle immagini classificate che mostrano una diminuzione del 5% dell'NDVI elevato (da 66% a 61%) in sintonia con il ridgeline che a sua volta, mostra, in Giugno, un picco accentuato di valori prossimi allo 0.  
 La formazione del lago di sbarramento, evidenziato tramite NDWI, a seugito della frana ha destato non poche preoccupazioni dato il rapido innalzamento delle acque subito dopo l'evento, come confermato dalle stesse autorità giunte sul luogo; si può apprezzare, però, lo sviluppo di un ramo fluviale che attraversa la massa di sedimenti e che ha portato, secondo fonti ufficiali, all'abbassamento dell'altezza di almeno un metro del lago.
 <p align="center">
