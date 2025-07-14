@@ -1,31 +1,31 @@
 # ESAME DI TELERIVAMENTO GEOECOLOGICO - GRAZIA LUCA - MAT. 1191463
 
 # PACCHETTI UTILIZZATI:
-library(terra) #attraverso la funzione rast() posso importare immagini .tif
-library(imageRy) #visualizzazione e analisi immagini
-library(viridis) #serve per creare plot di immagini con differenti palette di colori 
-library(ggridges) #permette di creare i plot ridgeline
-library(ggplot2) #permette di creare grafici a barre
-library(patchwork) # serve per unire dei grafici creati con ggplot2.
+  library(terra) #attraverso la funzione rast() posso importare immagini .tif, e altre funzioni;
+  library(imageRy) #visualizzazione e analisi immagini e altre funzioni;
+  library(viridis) #serve per creare plot di immagini con differenti palette di colori;
+  library(ggridges) #permette di creare i plot ridgeline;
+  library(ggplot2) #permette di creare grafici a barre, in questo caso;
+  library(patchwork) # serve per unire dei grafici creati con ggplot2.
 
 
 #Cosa analizzerò:
-#il seguente documento analizza come, nell'area del paese di blatten (comune del canton Vallese), sia avvenuta una variazione della copertura del suolo a seguito di una frana staccatasi dal ghiacciaio Birch il 28 maggio 2025 e la conseguente formazione di un lago creatosi dallo sbarramento duvuto alla frana.
-#La variazione viene analizzata attraverso l'applicazione di indici spettrali e analisi multitemporale
+#Il seguente documento analizza come, nell'area del paese di Blatten (comune del Canton Vallese), sia avvenuta una variazione della copertura del suolo a seguito di una frana staccatasi dal ghiacciaio Birch il 28 maggio 2025 e la conseguente formazione di un lago creatosi dallo sbarramento duvuto alla stessa.
+#La variazione viene analizzata attraverso l'applicazione di indici spettrali e analisi multitemporale.
 
 #Ricerca dei dati:
-#per ottenere le immagini da analizzare ho utilizzato il seguente sito: https://earthengine.google.com/ 
-#utilizzando Sentinel, ho applicato il codice JavaScript fornito da Rocio Beatriz Cortes Lobos durante le lezioni modificando:
+#Per ottenere le immagini da analizzare ho utilizzato il seguente sito: https://earthengine.google.com/ 
+#Utilizzando Sentinel, ho applicato il codice JavaScript fornito da Rocio Beatriz Cortes Lobos durante le lezioni modificando:
   # 1) l'area da analizzare
-  # 2) numero di bande 1=red, 2=green, 3=blue e 8=NIR
+  # 2) numero di bande 1=red, 2=green, 3=blue e 8=NIR (aggiunta)
   # 3) le date di acquisizione 
 
-# una volta modificati questi parametri, utilizzando sempre imamgini con copertura nuvolosa <20%, ho proceduto a salvare e scaricare le immagini 
+#Una volta modificati questi parametri, utilizzando sempre immagini con copertura nuvolosa <20%, ho proceduto a salvarle e scaricarle.
 
 
-# I due codici seguenti utilizzano il linguaggio di programmazione java script all'interno della piattaforma Google Earth Engine per ottenere le immagini relative al paese di Blatten e  frana staccatasi da ghiacciaio Birch il 28 maggio 2025
+#I codici seguenti utilizzano il linguaggio di programmazione JavaScript all'interno della piattaforma Google Earth Engine per ottenere le immagini relative al paese di Blatten e  frana staccatasi da ghiacciaio Birch il 28 maggio 2025.
 
-# Primo script per ottenere l'immagine "blattenpre1": riporta ula media composita di immagini che vanno dal 2025-05-01 al 2025-05-25 selezionando solo quelle con una copertura nuvolosa inferiore al 20%; le bande sono relative al rosso, verde, blu e NIR.
+#Primo script per ottenere l'immagine "blattenpre1": riporta la media composita di immagini  dal 2025-05-01 al 2025-05-25 selezionando solo quelle con una copertura nuvolosa inferiore al 20%; le bande sono relative al rosso, verde, blu e NIR.
 
 // ==============================================
 // Sentinel-2 Surface Reflectance - Cloud Masking and Visualization
@@ -107,7 +107,7 @@ Export.image.toDrive({
 
 
 
-# Secondo script per ottenere l'immagine "blattenpostNIR": riporta la media composita di immagini che vanno dal 2025-05-30 al 2025-06-30 selezionando solo immagini con una copertura nuvolosa <20% e le bande relative al rosso, verde, blu e NIR.
+#Secondo script per ottenere l'immagine "blattenpostNIR": riporta la media composita di immagini che vanno dal 2025-05-30 al 2025-06-30 selezionando solo immagini con una copertura nuvolosa <20% e le bande relative al rosso, verde, blu e NIR.
 
 // ==============================================
 // Sentinel-2 Surface Reflectance - Cloud Masking and Visualization
@@ -190,33 +190,18 @@ Export.image.toDrive({
 
 
 #Analisi dei dati satellitari:
-  #usando Google Earth Engine scarico e salvo le immagini su google drive, sucessivamente eseguo il download salvandole in formato .tif
+  #Usando Google Earth Engine scarico e salvo le immagini su Google drive, successivamente eseguo il download salvandole in formato .tif
 
 setwd("/Users/lucagrazia/Downloads") #imposto la working directory
 
-  #plotto immagine "blattenpre" che si riferisce al mese precedente alla frana
 blattenpre=rast("blattenpre1.tif") #importo il raster attraverso la funzione rast() di terra e lo nomino
-plot(blattenpre) #plotto l'immagine per visuallizzarla
-plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima") #plot RGB per visualizzare l'immagine nello spettro del visibile, Stretch lineare: i valori vengono riscalati linearmente tra 0 e 255 per visualizzare meglio l'immagine.
-dev.off()
-
-
-#ripeto la stessa funzione con la seconda immagine 
-
-  #plotto immagine "blattenpost" che si riferisce al mese successivo alla frana
 blattenpost=rast("blattenpostNIR.tif") #importo il raster attraverso la funzione rast() di terra e lo nomino
-plot(blattenpost) #plotto l'immagine per visuallizzarla
-plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo") #plot RGB per visualizzare l'immagine nello spettro del visibile, Stretch lineare: i valori vengono riscalati linearmente tra 0 e 255 per visualizzare meglio l'immagine.
-dev.off()
-
-#dato che ho scaricato e visualizzato le due immagini singolarmente ora imposto un pannello multiframe per visualizzarle entrambe 
 
 png("blattenrgb.png") #funzione che mi permette di salvare una copia dell'immagine in formato.png
-im.multiframe(1,2) #con questa funzione apro un pannello multiframe che mi permette di vedere le 2 immagini una affiancate (una linea, due colonne) 
-plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima")
+im.multiframe(1,2) #con questa funzione di imageRy apro un pannello multiframe che mi permette di vedere le 2 immagini una affiancate (una linea, due colonne) 
+plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima") #funzione plot RGB di imageRy per visualizzare l'immagine nello spettro del visibile, Stretch lineare: i valori vengono riscalati linearmente tra 0 e 255 per visualizzare meglio l'immagine.
 plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo")
 dev.off()
-
 
 # Confronto le due immagini mettendo in risalto solo le corrispettive al Near Infra-Red, cioè la banda 8: 
 
@@ -226,50 +211,50 @@ plot(blattenpre[[4]], stretch="lin", main = "BlattenpreNIR", col=inferno(100)) #
 plot(blattenpost[[4]], stretch="lin", main = "BlattenpostNIR", col=inferno(100))
 dev.off()
 
-# Visualizzazione del suolo nudo rispetto alla vegetazione impostando sulla banda del blu la banda dell'infrarosso in, questo fa risaltare la vegetazione di colore blu e tutto quello che non è vegetazione nella sccala del giallo, solitamente è usato per evidenziare il suolo nudo:
+# Visualizzazione del suolo nudo rispetto alla vegetazione impostando sulla banda del blu la banda dell'infrarosso in, questo fa risaltare la vegetazione di colore blu e tutto quello che non è vegetazione nella scala del giallo, solitamente è usato per evidenziare il suolo nudo:
 
 png("blattensuolonudo.png")
 im.multiframe(1,2)
-plotRGB(blattenpre, r = 1, g = 2, b = 4, stretch="lin", main = "Blatten Prima") 
+plotRGB(blattenpre, r = 1, g = 2, b = 4, stretch="lin", main = "Blatten Prima") #imposto il NIR sulla banda Blu
 plotRGB(blattenpost, r = 1, g = 2, b = 4, stretch="lin", main = "Blatten Dopo")
 dev.off()
 
-#si può notare che il colore blu è aumentato nella seconda immagine probabilemte perché è avvenuto uno scioglimento rapido della copertura nevosa
+#si può notare che il colore blu è aumentato nella seconda immagine probabilmente perché è avvenuto uno scioglimento rapido della copertura nevosa
 
 #INDICI SPETTRALI 
 
 #DIFFERENT VEGETATION INDEX - DVI
-  #Questo indice che ci dà informazione sullo stato di salute delle piante attraverso la riflettanza della vegetazione nelle bande del rosso e NIR. In caso di stress le cellule a palizzata collassano, allora quindi la riflettanza nel NIR sarà più bassa.
+  #Questo indice che ci dà informazione sullo stato di salute delle piante attraverso la riflettanza della vegetazione nelle bande del         rosso e NIR. In caso di stress le cellule a palizzata collassano, allora quindi la riflettanza nel NIR sarà più bassa.
   #Calcolo: DVI= NIR - red
 
-DVIpre=im.dvi(blattenpre, 4, 1) #funzione im.dvi di imageRy che prende l'immagine da analizzare e automaticamente sottrae dal NIR la banda del RED
-plot(DVIpre, col=inferno(100))
+DVIpre=im.dvi(blattenpre, 4, 1) #funzione im.dvi di imageRy che prende l'immagine da analizzare e automaticamente il dvi sottraendo dala banda NIR la banda del RED
+plot(DVIpre, col=inferno(100)) #uso inferno di viridis
 dev.off()
 
-DVIpost=im.dvi(blattenpost, 4, 1) 
-plot(DVIpost, col=inferno(100))
+DVIpost=im.dvi(blattenpost, 4, 1) #funzione im.dvi di imageRy che prende l'immagine da analizzare e automaticamente il dvi sottraendo dala banda NIR la banda del RED
+plot(DVIpost, col=inferno(100))  #uso inferno di viridis
 dev.off()
 
-# Creo un pannello multiframe per confrontare le immagini su cui è stato calcolalto il DVI:
+# Creo un pannello multiframe per confrontare le immagini su cui è stato calcolato il DVI:
 png("blattenDVI.png")
-im.multiframe(1,2)
+im.multiframe(1,2) #Creo un pannello multiframe per confrontare le immagini su cui è stato calcolato il DVI
 plot(DVIpre, stretch = "lin", main = "pre_frana", col=inferno(100))
 plot(DVIpost, stretch = "lin", main = "post_frana", col=inferno(100))
 dev.off()
 
-#nelle immagini si vede chiaramente la distribuzione della biomassa vegetale (visibile in giallo) che si protrae nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della frana rappresentato da un'area più scura 
+#nelle immagini si vede chiaramente la distribuzione della biomassa vegetale (visibile in giallo) che si estende nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della frana rappresentato da un'area più scura 
 
 
 #NORMALIZED DIFFERENCE VEGETATION INDEX
-  #Un secondo indice per l'analisi della vegetazione, dato che i valori vengono normalizzati  tra -1 e +1 possiamo attuare analisi che sono state acquisite in tempi diversi come ad esempio nel caso di Blatten per verificare l'impatto della frana.
+  #Un secondo indice per l'analisi della vegetazione, dato che i valori vengono normalizzati  tra -1 e +1 possiamo attuare analisi che sono   state acquisite in tempi diversi come ad esempio nel caso di  per verificare l'impatto della frana.
   # Calcolo: NDVI= (NIR - red) / (NIR + red)
 
 NDVIprima =im.ndvi(blattenpre, 4, 1) #anche in questo caso attraverso la funzione im.ndvi() di imageRy si semplifica il calcolo
-plot(NDVIprima, stretch = "lin", main = "NDVIpre", col=inferno(100))
+plot(NDVIprima, stretch = "lin", main = "NDVIprima_frana", col=inferno(100))
 dev.off()
 
 NDVIdopo =im.ndvi(blattenpost, 4, 1) 
-plot(NDVIdopo, stretch = "lin", main = "NDVIpost", col=inferno(100))
+plot(NDVIdopo, stretch = "lin", main = "NDVIdopo_frana", col=inferno(100))
 dev.off()
 
 png("blattenNDVI.png")
@@ -278,7 +263,7 @@ plot(NDVIprima, stretch = "lin", main = "NDVIprima_frana", col=inferno(100))
 plot(NDVIdopo, stretch = "lin", main = "NDVIdopo_frana", col=inferno(100))
 dev.off()
 
-#nella prima imamgine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza elevata di neve,mostrando comunque vaolori vicini allo 0.8; nella seconda immagine è presente una grossa massa inerte nel centro che è rappresentata dalla frana.
+#Nella prima immagine si può apprezzare come la vegetazione del fondovalle sia sana e abbia una buona copertura nonostante la presenza elevata di neve, mostrando comunque valori vicini allo 0.8; nella seconda immagine è presente una grossa massa inerte nel centro che è rappresentata dalla frana.
 
 #NORMALIZED DIFFERENCE WATER INDEX 
   # Indice usato in telerilevamento per identificare l'acqua superficiale nelle immagini satellitari.
@@ -296,29 +281,26 @@ sumpost=blattenpost[[2]]+blattenpost[[4]]
 NDWI_post=diffpost/sumpost
 plot(NDWI_post)
 
-# guardando il funzionamento della funzione im.ndvi(), dato che è simile al calcolo di ndwi, ho cercato di cambiare i dati immessi per crearne una che potesse restituirmi NDWI
+# Guardando il funzionamento della funzione im.ndvi(), dato che è simile al calcolo di ndwi, ho cercato di cambiare i dati immessi per crearne una che potesse restituirmi NDWI
+#imposto la funzione 
 im.ndwi <- function(x, green, nir){
   
-  if(!inherits(x, "SpatRaster")) {
+  if(!inherits(x, "SpatRaster")) {                                    #se non è SpatRaster si ferma
     stop("Input image should be a SpatRaster object.")
   }
   
   if(!inherits(green, "numeric") && !inherits(nir, "numeric")) {
-    stop("green and NIR layers should be indicated with a number")
+    stop("green and NIR layers should be indicated with a number")   #se verde e nir non non sono associati ad un numero si ferma
   }
   
-  ndwi = (x[[green]] - x[[nir]]) / (x[[green]] + x[[nir]])
+  ndwi = (x[[green]] - x[[nir]]) / (x[[green]] + x[[nir]])           #scrivo funzione di McFeeters
  
   return(ndwi)
   
 }
 
 NDWIprima= im.ndwi(blattenpre,2,4)
-plot(NDWIprima, stretch = "lin", main = "NDWI_prima", col=inferno(100))
-
-
 NDWIdopo=im.ndwi(blattenpost,2,4)
-plot(NDWIdopo, stretch = "lin", main = "NDWI_dopo", col=inferno(100))
 
 png("blattenNDWI.png")
 im.multiframe(1,2)
@@ -326,14 +308,14 @@ plot(NDWIprima, stretch = "lin", main = "NDWI_prima", col=inferno(100))
 plot(NDWIdopo, stretch = "lin", main = "NDWI_dopo", col=inferno(100))
 dev.off()
 
-#si può notare agevolmente un accumulo di acqua a mmonte della frana dovuto allo sbarramento del torrente Lonza
+#si può notare agevolmente un accumulo di acqua a monte della frana dovuto allo sbarramento del torrente Lonza
 
 
 #ANALISI MULTITEMPORALE
   #Analisi attraverso R per vedere come un'area specifica cambia nel tempo
 
-blatten_diff=blattenpre[[1]]-blattenpost[[1]] # variazione banda rosso
-blatten_NDVIdiff=NDVIprima-NDVIdopo    #variazione NDVI
+blatten_diff=blattenpre[[1]]-blattenpost[[1]] #rosso
+blatten_NDVIdiff=NDVIprima-NDVIdopo
 
 png("blattenmultitemp.png")
 im.multiframe(1,2)
@@ -343,15 +325,15 @@ dev.off()
 
 #funzione draw di terra
 plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten_POST (RGB)")
-crop_blatten = draw(x="extent", col="red", lwd=2) #rettangolo, rosso, di spessore 2
+crop_blatten = draw(x="extent", col="red", lwd=2) #rettangolo, rosso, di spessore 2 creato sull'immagine
 blatten_post_crop = crop(blattenpost, crop_blatten) #blattenpost croppata
 blatten_pre_crop = crop(blattenpre, crop_blatten) #blattenpre croppata
 
-blatten_ndvi_pre_crop = crop(NDVIprima, crop_blatten) #ndvi precedente croppato
+blatten_ndvi_pre_crop = crop(NDVIprima, crop_blatten) #ndvi precedente croppato 
 blatten_ndvi_post_crop = crop(NDVIdopo, crop_blatten) #ndvi successivo croppato
 
 png("blattencrop.png")
-im.multiframe(2,2)                                           # creo multiframe e plotto le nuove immagini croppate
+im.multiframe(2,2) # creo multiframe con le aree croppate e l'NDVI
 plotRGB(blatten_pre_crop, r = 1, g = 2, b = 3, stretch = "lin", main = "maggio")
 plotRGB(blatten_post_crop, r = 1, g = 2, b = 3, stretch = "lin", main = "giugno")
 plot(blatten_ndvi_pre_crop, main = "NDVI maggio")
@@ -366,16 +348,17 @@ dev.off()
 
 #Dal grafico si possono apprezzare due fattori:
   #NDVI di maggio può rappresentare una situazione di tarda primavera in zone di alta montagna
-  #NDVI di giugno mostra un aumento dei valori di NDVI basso (si nota anche la presenza dello speccio d'acqua) causati dalla presenza della frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
+  #NDVI di giugno mostra un aumento dei valori di NDVI basso (si nota anche la presenza dello specchio d'acqua) causati dalla presenza         della frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
 
 
 #Classificazione immagini
-  # visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, mostro la variazione 
-blatten_maggio_classi = im.classify(blatten_ndvi_pre_crop, num_clusters=2)            # divido i pixel di ogni immagine in due cluster per capire come sono stati classificati  
+  #visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, mostro la variazione 
+
+blatten_maggio_classi = im.classify(blatten_ndvi_pre_crop, num_clusters=2)   # divido i pixel di ogni immagine in due cluster per capire come sono stati classificati  
 blatten_giugno_classi = im.classify(blatten_ndvi_post_crop, num_clusters=2)
 
 png("visualizzazione_classi_ndvi1.png")
-im.multiframe(2,2)
+im.multiframe(2,2) #plotto le due immagini in cui risaltano i due cluster di pixel e la corrispettiva differerenza
 plot(blatten_maggio_classi, main = "Pixel prima della frana")
 plot(blatten_giugno_classi, main = "Pixel dopo la frana")
 plot(blatten_maggio_classi - blatten_giugno_classi, main = "Differenza Pixel NDVI blatten\n(maggio-giugno)")
@@ -383,9 +366,9 @@ dev.off()
 
 #valori:
   #1 valori elevati di NDVI -> vegetazione
-  #2 valori bassi di NDVI -> roccia
+  #2 valori bassi di NDVI -> roccia e ghiaccio
 
-  #la differenza è visibile attraverso il colore viola che mostra una differernza sostanziale 
+  #la differenza è visibile attraverso il colore viola che mostra una differenza sostanziale 
 
 #calcolo frequenza con freq() per contare il numero di celle (pixel) per ciascun valore presente in un oggetto raster
 #ncell per capire il totale di pixel 
@@ -416,10 +399,10 @@ tabout
 
 
 #funzione ggplot, funzione di base per fare i plot:
-  #tabout è il valore in imput
+  #tabout è il valore in input
   #aes imposta le aesthetic mappings (cioè, cosa va sull’asse X e sull’asse Y, riempimento e colore)
   #geom_bar serve per descrivere il tipo di grafico bar=istogramm
-  #ylim(c(0,100)) per mantere univoca una scala di riproduzione
+  #ylim(c(0,100)) per mantenere univoca una scala di riproduzione
 
 ggplotmaggio1 = ggplot(tabout, aes(x=NDVI, y=maggio, fill=NDVI, color=NDVI)) + geom_bar(stat="identity") + ylim(c(0,100))
 ggplotgiugno1 = ggplot(tabout, aes(x=NDVI, y=giugno, fill=NDVI, color=NDVI)) + geom_bar(stat="identity") + ylim(c(0,100))
