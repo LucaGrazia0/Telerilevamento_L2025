@@ -207,13 +207,13 @@ Sono stati utilizzati i seguenti pacchetti per importazione, visualizzazione e a
 + ***patchwork***, unione dei grafici creati con ggplot2.
 
 
-Dopo aver importato le immagini su google drive in formato .tif, eseguo il download salvandole nella cartella apposita sul mio dispositivo.  
+Dopo aver importato le immagini su Google Drive in formato .tif, eseguo il download salvandole nella cartella apposita sul mio dispositivo.  
 Per prima cosa, quindi, imposto la directory di lavoro
 ```R
 setwd("/Users/lucagrazia/Downloads") #imposto la working directory
 ```
 
-Importazione delle immagini su R attraverso la funzione rast() e visualizzazione con i colori reali, funizone plotRGB(), impostando un pannello multiframe per mostrarle entrambe.
+Importazione delle immagini su R attraverso la funzione rast() e visualizzazione con i colori reali, funzione plotRGB(), impostando un pannello multiframe per mostrarle entrambe.
 
 ```R
 blattenpre=rast("blattenpre1.tif") #importo il raster attraverso la funzione rast() di terra e lo nomino
