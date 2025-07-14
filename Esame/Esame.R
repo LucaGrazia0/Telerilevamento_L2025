@@ -1,4 +1,4 @@
-# ESAME DI TELERIVAMENTO GEOECOLOGICO - GRAZIA LUCA - MAT. 1191463
+                                  # ESAME DI TELERIVAMENTO GEOECOLOGICO - GRAZIA LUCA - MAT. 1191463
 
 # PACCHETTI UTILIZZATI:
   library(terra) #attraverso la funzione rast() posso importare immagini .tif, e altre funzioni;
