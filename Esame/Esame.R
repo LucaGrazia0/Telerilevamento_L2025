@@ -10,7 +10,7 @@
 
 
 #Cosa analizzerò:
-#Il seguente documento analizza come, nell'area del paese di Blatten (comune del Canton Vallese), sia avvenuta una variazione della copertura del suolo a seguito di una frana staccatasi dal ghiacciaio Birch il 28 maggio 2025 e la conseguente formazione di un lago creatosi dallo sbarramento duvuto alla stessa.
+#Il seguente documento analizza come, nell'area del paese di Blatten (comune del Canton Vallese), sia avvenuta una variazione della copertura del suolo a seguito di una frana staccatasi dal ghiacciaio Birch il 28 maggio 2025 e la conseguente formazione di un lago creatosi dallo sbarramento dovuto alla stessa.
 #La variazione viene analizzata attraverso l'applicazione di indici spettrali e analisi multitemporale.
 
 #Ricerca dei dati:
@@ -290,7 +290,7 @@ im.ndwi <- function(x, green, nir){
   }
   
   if(!inherits(green, "numeric") && !inherits(nir, "numeric")) {
-    stop("green and NIR layers should be indicated with a number")   #se verde e nir non non sono associati ad un numero si ferma
+    stop("green and NIR layers should be indicated with a number")   #se verde e nir non sono associati ad un numero si ferma
   }
   
   ndwi = (x[[green]] - x[[nir]]) / (x[[green]] + x[[nir]])           #scrivo funzione di McFeeters
@@ -358,7 +358,7 @@ blatten_maggio_classi = im.classify(blatten_ndvi_pre_crop, num_clusters=2)   # d
 blatten_giugno_classi = im.classify(blatten_ndvi_post_crop, num_clusters=2)
 
 png("visualizzazione_classi_ndvi1.png")
-im.multiframe(2,2) #plotto le due immagini in cui risaltano i due cluster di pixel e la corrispettiva differerenza
+im.multiframe(2,2) #plotto le due immagini in cui risaltano i due cluster di pixel e la corrispettiva differenza
 plot(blatten_maggio_classi, main = "Pixel prima della frana")
 plot(blatten_giugno_classi, main = "Pixel dopo la frana")
 plot(blatten_maggio_classi - blatten_giugno_classi, main = "Differenza Pixel NDVI blatten\n(maggio-giugno)")
