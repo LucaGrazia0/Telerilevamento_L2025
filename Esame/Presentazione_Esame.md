@@ -435,7 +435,7 @@ dev.off()
 >*Distribuzioni di NDVI nelle due immagini croppate*
 
 Dal grafico si possono apprezzare due fattori:
-+ **NDVI di maggio** può rappresentare una situazione di tarda primavera in zone di alta montagna, si distinguono due picchi che corrispondono presumibilmente alla vegetazione al al suolo/neve;
++ **NDVI di maggio** può rappresentare una situazione di tarda primavera in zone di alta montagna, si distinguono due picchi che corrispondono presumibilmente alla vegetazione al suolo/neve;
 + **NDVI di giugno** mostra un aumento dei valori di NDVI basso (si nota anche la presenza di valori inferiori a -0.5) causati dalla presenza del materiale inerte portato dalla frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
 
 
@@ -462,7 +462,7 @@ dev.off()
 
 Valori delle classi:
 + 1 valori **elevati** di NDVI -> vegetazione
-+ 2 valori **bassi** di NDVI -> roccia, neve, sassi,...
++ 2 valori **bassi** di NDVI -> roccia, neve, sassi, ...
 
 Il colore viola mostra la differenza sostanziale tra le due immagini evidenziando la perdita di vegetazione nell'area colpita.  
 Trovo quindi le percentuali di copertura di ciascuna classe di pixel relativi alle due immagini, per farlo calcolo, attraverso la funzione freq() di **R**, il numero di celle (pixel) di ciascun valore.
