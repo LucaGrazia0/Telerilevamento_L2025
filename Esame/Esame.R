@@ -310,7 +310,7 @@ plot(NDWIprima, stretch = "lin", main = "NDWI_prima", col=inferno(100))
 plot(NDWIdopo, stretch = "lin", main = "NDWI_dopo", col=inferno(100))
 dev.off()
 
-#si può notare agevolmente un accumulo di acqua a monte della frana dovuto allo sbarramento del torrente Lonza
+#Si può notare agevolmente un accumulo di acqua a monte della frana dovuto allo sbarramento del torrente Lonza
 
 
                                               #ANALISI MULTITEMPORALE
@@ -325,7 +325,7 @@ plot(blatten_diff, main = "BLATTEN PRIMA E DOPO:\ndifferenza banda del rosso", c
 plot(blatten_NDVIdiff, main = "BLATTEN PRIMA E DOPO:\ndifferenza NDVI", col=rocket(100)) #differenza NDVI tra le due immagini, visibile la frana
 dev.off()
 
-#funzione draw di terra
+#Funzione draw di terra
 plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten_POST (RGB)")
 crop_blatten = draw(x="extent", col="red", lwd=2) #rettangolo, rosso, di spessore 2 creato sull'immagine
 blatten_post_crop = crop(blattenpost, crop_blatten) #blattenpost croppata
@@ -366,10 +366,9 @@ plot(blatten_giugno_classi, main = "Pixel dopo la frana")
 plot(blatten_maggio_classi - blatten_giugno_classi, main = "Differenza Pixel NDVI blatten\n(maggio-giugno)")
 dev.off()
 
-#valori:
+#Valori:
   #1 valori elevati di NDVI -> vegetazione
   #2 valori bassi di NDVI -> roccia e ghiaccio
-
   #la differenza è visibile attraverso il colore viola che mostra una differenza sostanziale 
 
 #Calcolo frequenza con freq() per contare il numero di celle (pixel) per ciascun valore presente in un oggetto raster
@@ -397,12 +396,12 @@ tabout = data.frame(NDVI, maggio, giugno)     #creo dataframe
 tabout
      NDVI   maggio giugno
 1   basso     34     39
-2 elevato     66     61
+2  elevato    66     61
 
 
-#funzione ggplot, funzione di base per fare i plot:
+#Funzione ggplot, funzione di base per fare i plot:
   #tabout è il valore in input
-  #aes imposta le aesthetic mappings (cioè, cosa va sull’asse X e sull’asse Y, riempimento e colore)
+  #aes imposta le aesthetic mappings (cioè, cosa mettere sull’asse X e sull’asse Y, riempimento e colore)
   #geom_bar serve per descrivere il tipo di grafico bar=istogramm
   #ylim(c(0,100)) per mantenere univoca una scala di riproduzione
 
