@@ -1,4 +1,4 @@
-# ESAME DI TELERILEVAMENTO GEOECOLOGICO
+ # ESAME DI TELERILEVAMENTO GEOECOLOGICO
 > ## Grazia Luca
 >> ### matricola n. 1191463
 
@@ -513,15 +513,15 @@ dev.off()
 
 ## Conclusioni ✍️📖
 L'analisi multitemporale attuata sulle immagini satellitari relative all'area della valle del Lötschental interessata dalla frana mostra una variazione significativa nella copertura vegetale tra il mese di maggio e il mese di giugno, questo cambiamento è chiaramente distinguibile attraverso l'applicazione di indici spettrali come DVI e NDVI.  
-L'area di studio a cui è stato applicato l'ingrandimento mostra una **diminuzione significativa** dei valori di NDVI, sintomo di un azzeramento dell'attività fotosintetica conseguente alla distuzione della vegetazione nelle zone colpite dalla frana. Questa tesi è sostenuta anche dalle immagini classificate che mostrano una diminuzione del 5% dell'NDVI elevato (da 66% a 61%) in sintonia con il ridgeline che a sua volta, mostra, in Giugno, un picco accentuato di valori prossimi allo 0.  
-La formazione del lago di sbarramento, evidenziato tramite NDWI, a seugito della frana ha destato non poche preoccupazioni dato il rapido innalzamento delle acque subito dopo l'evento, come confermato dalle stesse autorità giunte sul luogo; si può apprezzare, però, lo sviluppo di un ramo fluviale che attraversa la massa di sedimenti e che ha portato, secondo fonti ufficiali, all'abbassamento dell'altezza di almeno un metro del lago.
+L'area di studio a cui è stato applicato l'ingrandimento mostra una **diminuzione significativa** dei valori di NDVI, sintomo di un azzeramento dell'attività fotosintetica conseguente alla distruzione della vegetazione nelle zone colpite dalla frana. Questa tesi è sostenuta anche dalle immagini classificate che mostrano una diminuzione del 5% dell'NDVI elevato (da 66% a 61%) in sintonia con il ridgeline che a sua volta, mostra, in Giugno, un picco accentuato di valori prossimi allo 0.  
+La formazione del lago di sbarramento, evidenziato tramite NDWI, a seguito della frana ha destato non poche preoccupazioni dato il rapido innalzamento delle acque subito dopo l'evento, come confermato dalle stesse autorità giunte sul luogo; si può apprezzare, però, lo sviluppo di un ramo fluviale che attraversa la massa di sedimenti e che ha portato, secondo fonti ufficiali, all'abbassamento dell'altezza di almeno un metro del lago.
 <p align="center">
   <img width="480" height="480" src="https://github.com/user-attachments/assets/e4bb239b-235b-4227-9a2c-a825693d182d" />
 </p>
 
 >*imamgine croppata della frana per valutare tramite NDWI lo stato del lago e il deflusso di acqua*
 
-L'evento, grazie al telerilevamento, potrà essere costantemente monitorato in futuro, in modo da fornire dati più specifici e prevenire ulteriori emergenze, nello specifico:
+L'evento è stato previsto anticipatamente attraverso l'uso di sensori posti sul ghiacciaio per monitorarne gli spostamenti e grazie al telerilevamento, potrà essere costantemente monitorato in futuro proprio grazie a quest'ultimo metodo, in modo da fornire dati più specifici e prevenire ulteriori emergenze, nello specifico:
 + monitoraggio continuo della frana nei mesi successivi per valutare i movimenti successivi della massa; 
 + monitorare i cambiamenti del lago per prevenire possibili straripamenti e ulteriori danni nella valle;   
 + monitoraggio a lungo termine alla vegetazione per quantificare l'impatto e pianificare una rigenerazione naturale.
