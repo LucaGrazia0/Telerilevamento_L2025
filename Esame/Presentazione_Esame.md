@@ -347,7 +347,7 @@ im.ndwi <- function(x, green, nir){
   }
   
   if(!inherits(green, "numeric") && !inherits(nir, "numeric")) {
-    stop("green and NIR layers should be indicated with a number")   #se verde e nir non non sono associati ad un numero si ferma
+    stop("green and NIR layers should be indicated with a number")   #se verde e nir non sono associati ad un numero si ferma
   }
   
   ndwi = (x[[green]] - x[[nir]]) / (x[[green]] + x[[nir]])           #scrivo funzione di McFeeters
