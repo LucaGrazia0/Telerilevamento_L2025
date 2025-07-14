@@ -189,8 +189,10 @@ Export.image.toDrive({
 
 
 
-#Analisi dei dati satellitari:
-  #Usando Google Earth Engine scarico e salvo le immagini su Google drive, successivamente eseguo il download salvandole in formato .tif
+                                                  #Analisi dei dati satellitari:
+
+
+#Usando Google Earth Engine scarico e salvo le immagini su Google drive, successivamente eseguo il download salvandole in formato .tif
 
 setwd("/Users/lucagrazia/Downloads") #imposto la working directory
 
@@ -203,7 +205,7 @@ plotRGB(blattenpre, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Prima"
 plotRGB(blattenpost, r = 1, g = 2, b = 3, stretch = "lin", main = "Blatten Dopo")
 dev.off()
 
-# Confronto le due immagini mettendo in risalto solo le corrispettive al Near Infra-Red, cioè la banda 8: 
+#Confronto le due immagini mettendo in risalto solo le corrispettive al Near Infra-Red, cioè la banda 8: 
 
 png("blattenbandaNIR.png")
 im.multiframe(1,2) 
@@ -211,7 +213,7 @@ plot(blattenpre[[4]], stretch="lin", main = "BlattenpreNIR", col=inferno(100)) #
 plot(blattenpost[[4]], stretch="lin", main = "BlattenpostNIR", col=inferno(100))
 dev.off()
 
-# Visualizzazione del suolo nudo rispetto alla vegetazione impostando sulla banda del blu la banda dell'infrarosso in, questo fa risaltare la vegetazione di colore blu e tutto quello che non è vegetazione nella scala del giallo, solitamente è usato per evidenziare il suolo nudo:
+#Visualizzazione del suolo nudo rispetto alla vegetazione impostando sulla banda del blu la banda dell'infrarosso in, questo fa risaltare la vegetazione di colore blu e tutto quello che non è vegetazione nella scala del giallo, solitamente è usato per evidenziare il suolo nudo:
 
 png("blattensuolonudo.png")
 im.multiframe(1,2)
@@ -221,7 +223,7 @@ dev.off()
 
 #si può notare che il colore blu è aumentato nella seconda immagine probabilmente perché è avvenuto uno scioglimento rapido della copertura nevosa
 
-#INDICI SPETTRALI 
+                                                      #INDICI SPETTRALI 
 
 #DIFFERENT VEGETATION INDEX - DVI
   #Questo indice che ci dà informazione sullo stato di salute delle piante attraverso la riflettanza della vegetazione nelle bande del         rosso e NIR. In caso di stress le cellule a palizzata collassano, allora quindi la riflettanza nel NIR sarà più bassa.
@@ -235,14 +237,14 @@ DVIpost=im.dvi(blattenpost, 4, 1) #funzione im.dvi di imageRy che prende l'immag
 plot(DVIpost, col=inferno(100))  #uso inferno di viridis
 dev.off()
 
-# Creo un pannello multiframe per confrontare le immagini su cui è stato calcolato il DVI:
+#Creo un pannello multiframe per confrontare le immagini su cui è stato calcolato il DVI:
 png("blattenDVI.png")
 im.multiframe(1,2) #Creo un pannello multiframe per confrontare le immagini su cui è stato calcolato il DVI
 plot(DVIpre, stretch = "lin", main = "pre_frana", col=inferno(100))
 plot(DVIpost, stretch = "lin", main = "post_frana", col=inferno(100))
 dev.off()
 
-#nelle immagini si vede chiaramente la distribuzione della biomassa vegetale (visibile in giallo) che si estende nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della frana rappresentato da un'area più scura 
+#Nelle immagini si vede chiaramente la distribuzione della biomassa vegetale (visibile in giallo) che si estende nella valle, la differenza principale sorge nella seconda immagine dove c'è un chiaro segno della frana rappresentato da un'area più scura 
 
 
 #NORMALIZED DIFFERENCE VEGETATION INDEX
@@ -281,7 +283,7 @@ sumpost=blattenpost[[2]]+blattenpost[[4]]
 NDWI_post=diffpost/sumpost
 plot(NDWI_post)
 
-# Guardando il funzionamento della funzione im.ndvi(), dato che è simile al calcolo di ndwi, ho cercato di cambiare i dati immessi per crearne una che potesse restituirmi NDWI
+#Guardando il funzionamento della funzione im.ndvi(), dato che è simile al calcolo di ndwi, ho cercato di cambiare i dati immessi per crearne una che potesse restituirmi NDWI
 #imposto la funzione 
 im.ndwi <- function(x, green, nir){
   
@@ -311,8 +313,8 @@ dev.off()
 #si può notare agevolmente un accumulo di acqua a monte della frana dovuto allo sbarramento del torrente Lonza
 
 
-#ANALISI MULTITEMPORALE
-  #Analisi attraverso R per vedere come un'area specifica cambia nel tempo
+                                              #ANALISI MULTITEMPORALE
+#Analisi attraverso R per vedere come un'area specifica cambia nel tempo
 
 blatten_diff=blattenpre[[1]]-blattenpost[[1]] #rosso
 blatten_NDVIdiff=NDVIprima-NDVIdopo
@@ -351,8 +353,8 @@ dev.off()
   #NDVI di giugno mostra un aumento dei valori di NDVI basso (si nota anche la presenza dello specchio d'acqua) causati dalla presenza         della frana, mostra inoltre un aumento dei valori di NDVI alto dato che la vegetazione è in piena attività fotosintetica
 
 
-#Classificazione immagini
-  #visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, mostro la variazione 
+                                              #Classificazione immagini
+#Visualizzare la variazione percentuale di NDVI nel sito, prima suddivido i pixel in due classi e poi, tramite un grafico a barre del pacchetto ggplot2, mostro la variazione 
 
 blatten_maggio_classi = im.classify(blatten_ndvi_pre_crop, num_clusters=2)   # divido i pixel di ogni immagine in due cluster per capire come sono stati classificati  
 blatten_giugno_classi = im.classify(blatten_ndvi_post_crop, num_clusters=2)
@@ -370,9 +372,9 @@ dev.off()
 
   #la differenza è visibile attraverso il colore viola che mostra una differenza sostanziale 
 
-#calcolo frequenza con freq() per contare il numero di celle (pixel) per ciascun valore presente in un oggetto raster
+#Calcolo frequenza con freq() per contare il numero di celle (pixel) per ciascun valore presente in un oggetto raster
 #ncell per capire il totale di pixel 
-#per le proporzioni si fa freq/tot per conoscere la percentuale di immagine coperta da ciascuna classe. È fondamentale per interpretare, confrontare e analizzare i risultati di una classificazione raster.
+#Per le proporzioni si fa freq/tot per conoscere la percentuale di immagine coperta da ciascuna classe. È fondamentale per interpretare, confrontare e analizzare i risultati di una classificazione raster.
 
 percentuale_maggio = freq(blatten_maggio_classi) * 100 / ncell(blatten_maggio_classi)
 percentuale_maggio
