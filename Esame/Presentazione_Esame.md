@@ -525,7 +525,7 @@ La formazione del lago di sbarramento, evidenziato tramite NDWI, a seguito della
 
 >*imamgine croppata della frana per valutare tramite NDWI lo stato del lago e il deflusso di acqua*
 
-L'evento è stato previsto anticipatamente attraverso l'uso di sensori posti sul ghiacciaio per monitorarne gli spostamenti e grazie al telerilevamento, potrà essere costantemente monitorato in futuro proprio grazie a quest'ultimo metodo, in modo da fornire dati più specifici e prevenire ulteriori emergenze, nello specifico:
+L'evento, previsto anticipatamente attraverso l'uso di sensori posti sul ghiacciaio per monitorarne gli spostamenti e grazie al telerilevamento, potrà essere costantemente monitorato in futuro proprio con l'auito di quest'ultimo metodo, in modo da fornire dati puntuali e prevenire ulteriori emergenze, nello specifico:
 + monitoraggio continuo della frana nei mesi successivi per valutare i movimenti successivi della massa; 
 + monitorare i cambiamenti del lago per prevenire possibili straripamenti e ulteriori danni nella valle;   
 + monitoraggio a lungo termine alla vegetazione per quantificare l'impatto e pianificare una rigenerazione naturale.
