@@ -20,7 +20,7 @@ Per l'area di studio sono state scelte due immagini, nello specifico:
 + per la seconda, il periodo preso in considerazione va dal **30/05** al **30/06**, il mese successivo alla frana.
 
 Ecco di seguito il codice in JavaScript utilizzato su [Google Earth Engine](https://earthengine.google.com):
-
+ 
 ``` JavaScript
 var aoi = 
     /* color: #98ff00 */
@@ -112,6 +112,7 @@ Export.image.toDrive({
   maxPixels: 1e13
 });
 ```
+
 Il codice è stato utilizzato per ottenere l'immagine "blattenpre1" per poi essere riutilizzato una seconda volta per scaricare l'immagine relativa al mese di giugno "blattenpostNIR".
 
 ``` JavaScript
@@ -193,7 +194,6 @@ Export.image.toDrive({
   maxPixels: 1e13
 });
 ```
-
 Le immagini restituite sono la mediana composita delle immagini relative al periodo indicato, un filtro ulteriore è stato applicato scegliendo solo quelle la cui copertura nuvolosa è inferiore al 20%.
 
 ### Importazione immagini su R e visualizzazione 💻
