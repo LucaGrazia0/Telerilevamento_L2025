@@ -20,7 +20,7 @@ Per l'area di studio sono state scelte due immagini, nello specifico:
 + per la prima, il periodo preso in considerazione va dal **01/05** al **25/05**, il mese precedente alla frana; 
 + per la seconda, il periodo preso in considerazione va dal **30/05** al **30/06**, il mese successivo alla frana.
 
-Ecco di seguito il codice in JavaScript utilizzato su [Google Earth Engine](https://earthengine.google.com) per ottenere l'immagine "blattenpre1" ed essere poi riutilizzato una seconda volta per scaricare l'immagine relativa al mese di giugno "blattenpostNIR":
+Ecco di seguito il codice in JavaScript utilizzato su [Google Earth Engine](https://earthengine.google.com) per ottenere l'immagine "blattenpre1" ed essere poi riutilizzato una seconda volta per l'immagine relativa al mese di giugno "blattenpostNIR":
 <details>
 <summary>codici JavaScript (cliccare qui)</summary>
   
