@@ -251,7 +251,7 @@ dev.off()
 
 >*Si può intravedere, anche se con difficoltà, una massa nel centro dell'immagine che corrisponde alla frana*
 
-Visualizzo quindi il suolo nudo ponendo la banda **NIR**, al posto della banda blu mostrando così la vegetazione di quest'ultimo colore mentre tutto quello che non è vegetazione viene mostrato nella scala del giallo, solitamente è usato per evidenziare il suolo nudo.
+Visualizzo quindi il suolo nudo ponendo la banda **NIR**, al posto della banda blu mostrando così la vegetazione di quest'ultimo colore mentre tutto quello che non è vegetazione viene mostrato nella scala del giallo, evidenziando così il suolo nudo.
 
 ```R
 png("blattensuolonudo.png")
@@ -272,7 +272,8 @@ dev.off()
 ##### DIFFERENT VEGETATION INDEX - DVI 🌲
 $` DVI = NIR - Red `$
 
-Questo indice restituisce informazioni dettagliate sullo stato di salute delle piante attraverso la riflettanza della vegetazione nelle bande del rosso e NIR. In caso di stress le cellule a palizzata diminuiscono la loro capacità fotosintetica per ridurre la perdita d'acqua, per cui la riflettanza nel NIR sarà più bassa.
+Questo indice restituisce informazioni dettagliate sullo stato di salute delle piante attraverso la riflettanza della vegetazione nelle bande del rosso e NIR.  
+In caso di stress le cellule a palizzata diminuiscono la loro capacità fotosintetica per ridurre la perdita d'acqua, per cui la riflettanza nel NIR sarà più bassa.
 ```R
 DVIpre=im.dvi(blattenpre, 4, 1) #funzione im.dvi di imageRy che prende l'immagine da analizzare e automaticamente il dvi sottraendo dala banda NIR la banda del RED
 plot(DVIpre, col=inferno(100)) #uso inferno di viridis
@@ -298,7 +299,7 @@ dev.off()
 #### NORMALIZED DIFFERENCE VEGETATION INDEX - NDVI 🌲
 $` NDVI = \frac{(NIR - Red)}{(NIR + Red)} `$
 
-L'NDVI è un indice spettrale usato per misurare la “vigoria” o lo stato di salute della vegetazione, i valori restituiti vengono normalizzati tra -1 e +1 (calcolando la somma NIR + red).
+L'NDVI è un indice spettrale usato per misurare la “vigoria” o lo stato di salute della vegetazione, i valori restituiti vengono normalizzati tra -1 e +1 (calcolando la somma NIR + red).  
 In questo caso si può verificare la presenza della vegetazione nelle immagini che sono per verificare l'impatto della frana.
 
 ```R
